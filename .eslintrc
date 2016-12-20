@@ -5,7 +5,13 @@
     "indent": [ "error", 2 ],
     "quotes": [ "error", "single" ],
     "semi": ["error", "always"],
-    "linebreak-style": [ "error", "unix" ]
+    "linebreak-style": [ "error", "unix" ],
+    "no-unused-vars": "off"
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "env": {
     "es6": true,
@@ -14,6 +20,7 @@
     "jasmine": true
   },
   "globals": {
+    "document": true
   },
   "ecmaFeatures": {
     "modules": true,
