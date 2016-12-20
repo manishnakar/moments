@@ -1,0 +1,23 @@
+{
+  "name": "moments",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefuhnee/moments.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "stefuhnee@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefuhnee/moments/issues"
+  },
+  "homepage": "https://github.com/stefuhnee/moments#readme"
+}
