@@ -4,6 +4,7 @@
 db
 .env
 data/*
+coverage
 
 ### Node ###
 # Logs
