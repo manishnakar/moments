@@ -2,17 +2,17 @@
 
 const express = require('express');
 const firebase = require('firebase/app');
+require('firebase/storage');
+require('firebase/auth');
+require('firebase/database');
 const dotenv = require('dotenv');
-const debug = require('debug')('moments:server');
+// const debug = require('debug')('moments:server');
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-// // Get a reference to the storage service, which is used to create references in your storage bucket
-// const storage = firebase.storage;
-//
-// // Create a storage reference from our storage service
-// const storageRef = storage.ref;
+
+dotenv.load();
 
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -23,9 +23,14 @@ const config = {
 };
 
 firebase.initializeApp(config);
-dotenv.load();
+
+app.use(express.static('./'));
+
+app.get('*', function(request, response) {
+  response.sendFile('index.html', { root: '.' });
+});
 
 
 module.exports = app.listen(PORT, () => {
-  debug(`Listening on ${PORT}`);
+  console.log(`Listening on ${PORT}`);
 });
