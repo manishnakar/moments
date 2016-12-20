@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server",
     "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
-    "start": "node server.js",
     "start-debug": "DEBUG='moments*' npm start",
     "lint": "./node_modules/eslint/bin/eslint.js .",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
