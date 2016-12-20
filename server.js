@@ -5,17 +5,14 @@ const firebase = require('firebase/app');
 const dotenv = require('dotenv');
 const debug = require('debug')('moments:server');
 
-// Get a reference to the storage service, which is used to create references in your storage bucket
-const storage = firebase.storage();
-
-// Create a storage reference from our storage service
-const storageRef = storage.ref();
-
 const app = express();
+
 const PORT = process.env.PORT || 3000;
-
-dotenv.load();
-
+// // Get a reference to the storage service, which is used to create references in your storage bucket
+// const storage = firebase.storage;
+//
+// // Create a storage reference from our storage service
+// const storageRef = storage.ref;
 
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -26,7 +23,9 @@ const config = {
 };
 
 firebase.initializeApp(config);
+dotenv.load();
 
-const server = module.exports = app.listen(PORT, () => {
-  debug(`Listening on ${PORT}`)
+
+module.exports = app.listen(PORT, () => {
+  debug(`Listening on ${PORT}`);
 });
