@@ -2,6 +2,7 @@
 const firebase = require('firebase/app');
 require('firebase/auth');
 require('firebase/database');
+require('firebase/storage');
 const dotenv = require('dotenv');
 
 dotenv.load();

@@ -1,20 +1,23 @@
 language: node_js
 node_js:
-  - '4.5.0'
+- 4.5.0
 services:
-  - mongodb
+- mongodb
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - gcc-4.8
-      - g++-4.8
+    - gcc-4.8
+    - g++-4.8
 env:
+  matrix:
   - CXX=g++-4.8
+  global:
+    secure: ClvlSgSA1K2S3+b9hr2sOvyTrF+tvmVhZenIsVn7zLYPGSMipEeIeCgnXd71zVElPG0uFGDvyEVrDBA4IO5SzSzw31bu77iV4YvNVH038gwB0+IXhB48vuspNEynv7XGbM1dYkAYouamFG6yhJT5WygZ0n5iDl+03JjSFyslZ1Tu7uaV/Ygwy+oGqqmCR2sLONdb5blo5+nsvjDZwevQit8bLQ3L+uN2p8yHiqU49UaN97eJW71iCv025EFCQLizSC5+bprle55+VT+pPoSs/qC8ylpY2/q/lac7rirkTqnOsPHDM8H5vXMswNw27zVfYKwpBezPoV/NkcqAK9/+3e2aOXpW8zRgeT8jtb1jpP3mns5Fdn0GxoN8Ad3JFKewtz7bCCsha3mdC3B4YF8/jHAURweRuKpFmEM7kafNvHtDNFhZ64aBgptLVz0giVfOe+p7f1xSLB01EbYj7DQO24p11nO3A3vf0Q0QP/VymR339+ee5wYy11LoV08AJxos37IUQx/OD3bjYW3i6zQCkGOm3ALBbe1yRS3pble9lxKEBOzVmrtB7MKsiZasvZIms9E6R2AUedXWs8TSaIlW/BCcbCLYdGPe7CWJ6lVcYenDLa77OYVoikST5NTM4u1NveQW/t/I40OB6YrgladsgWNc6NEaBtGtHPZOV+sq96A=
 sudo: required
 before_script: npm i
-after_success: 'npm run coveralls'
+after_success: npm run coveralls
 script:
-  - npm test
-  - npm run lint
+- npm test
+- npm run lint

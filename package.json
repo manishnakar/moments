@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha",
     "start": "node index.js",
-    "lint": "./node_modules/eslint/bin/eslint.js ."
+    "lint": "./node_modules/eslint/bin/eslint.js .",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",
@@ -22,8 +23,11 @@
   },
   "homepage": "https://github.com/stefuhnee/moments#readme",
   "devDependencies": {
+    "coveralls": "^2.11.15",
     "eslint": "^3.12.2",
-    "mocha": "^3.2.0"
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "mocha-lcov-reporter": "^1.2.0"
   },
   "dependencies": {
     "dotenv": "^2.0.0",
