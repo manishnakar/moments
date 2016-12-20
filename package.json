@@ -30,9 +30,11 @@
     "chai": "^3.5.0",
     "coveralls": "^2.11.15",
     "eslint": "^3.12.2",
+    "html-webpack-plugin": "^2.24.1",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
     "debug": "^2.4.5",
