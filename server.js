@@ -24,6 +24,8 @@ const config = {
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
 };
 
+app.use(express.static('build'));
+
 firebase.initializeApp(config);
 
 
