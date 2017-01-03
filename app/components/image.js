@@ -2,10 +2,12 @@
 
 const React = require('react');
 
+const image = {};
+
 module.exports = React.createClass({
   render: function() {
     return (
-      <img src="../../assets/img/beauty.jpg"></img>
+      <img src={this.props.src}></img>
     );
   },
 });
