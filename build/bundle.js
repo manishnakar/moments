@@ -56,9 +56,9 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _gallery = __webpack_require__(182);
+	var _Gallery = __webpack_require__(182);
 
-	var _gallery2 = _interopRequireDefault(_gallery);
+	var _Gallery2 = _interopRequireDefault(_Gallery);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -80,7 +80,7 @@
 	  _createClass(App, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_gallery2.default, { images: [{ src: '../../assets/img/beauty.jpg' }] });
+	      return _react2.default.createElement(_Gallery2.default, { images: [{ src: '../../assets/img/beauty.jpg' }] });
 	    }
 	  }]);
 
@@ -21532,15 +21532,19 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _image = __webpack_require__(183);
+	var _Image = __webpack_require__(183);
 
-	var _image2 = _interopRequireDefault(_image);
+	var _Image2 = _interopRequireDefault(_Image);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21550,7 +21554,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	module.exports = function (_Component) {
+	var Gallery = function (_Component) {
 	  _inherits(Gallery, _Component);
 
 	  function Gallery() {
@@ -21566,7 +21570,7 @@
 	        'div',
 	        null,
 	        this.props.images.map(function (image) {
-	          return _react2.default.createElement(_image2.default, { key: image.src, src: image.src });
+	          return _react2.default.createElement(_Image2.default, { key: image.src, src: image.src });
 	        })
 	      );
 	    }
@@ -21575,11 +21579,19 @@
 	  return Gallery;
 	}(_react.Component);
 
+	;
+
+	exports.default = Gallery;
+
 /***/ },
 /* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -21597,7 +21609,7 @@
 
 	var image = {};
 
-	module.exports = function (_Component) {
+	var Image = function (_Component) {
 	  _inherits(Image, _Component);
 
 	  function Image() {
@@ -21615,6 +21627,10 @@
 
 	  return Image;
 	}(_react.Component);
+
+	;
+
+	exports.default = Image;
 
 /***/ }
 /******/ ]);

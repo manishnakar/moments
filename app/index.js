@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Gallery from './components/gallery';
+import Gallery from './components/Gallery';
 
 class App extends Component {
   render() {

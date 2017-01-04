@@ -1,9 +1,9 @@
 'use strict';
 
 import React, { Component } from 'react';
-import Image from './image';
+import Image from './Image';
 
-module.exports = class Gallery extends Component {
+class Gallery extends Component {
   render() {
     return (
       <div>
@@ -16,3 +16,5 @@ module.exports = class Gallery extends Component {
     )
   }
 };
+
+export default Gallery;

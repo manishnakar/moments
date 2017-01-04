@@ -4,10 +4,12 @@ import React, { Component } from 'react';
 
 const image = {};
 
-module.exports = class Image extends Component {
+class Image extends Component {
   render() {
     return (
       <img src={this.props.src}></img>
     )
   }
 };
+
+export default Image;
