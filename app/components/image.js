@@ -1,13 +1,13 @@
 'use strict';
 
-const React = require('react');
+import React, { Component } from 'react';
 
 const image = {};
 
-module.exports = React.createClass({
-  render: function() {
+module.exports = class Image extends Component {
+  render() {
     return (
       <img src={this.props.src}></img>
-    );
-  },
-});
+    )
+  }
+};

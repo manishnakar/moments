@@ -1,10 +1,10 @@
 'use strict';
 
-const React = require('react');
-const Image = require('./image');
+import React, { Component } from 'react';
+import Image from './image';
 
-module.exports = React.createClass({
-  render: function() {
+module.exports = class Gallery extends Component {
+  render() {
     return (
       <div>
         {
@@ -13,6 +13,6 @@ module.exports = React.createClass({
           })
         }
       </div>
-    );
-  },
-});
+    )
+  }
+};
