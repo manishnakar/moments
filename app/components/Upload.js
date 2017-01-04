@@ -10,7 +10,7 @@ class Upload extends Component {
         Description: <input type="text" />
         <button>Upload</button>
       </form>
-    )
+    );
   }
 }
 

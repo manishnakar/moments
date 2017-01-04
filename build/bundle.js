@@ -21588,8 +21588,6 @@
 	  return Gallery;
 	}(_react.Component);
 
-	;
-
 	exports.default = Gallery;
 
 /***/ },
@@ -21636,8 +21634,6 @@
 
 	  return Image;
 	}(_react.Component);
-
-	;
 
 	exports.default = Image;
 

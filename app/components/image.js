@@ -8,8 +8,8 @@ class Image extends Component {
   render() {
     return (
       <img src={this.props.src}></img>
-    )
+    );
   }
-};
+}
 
 export default Image;

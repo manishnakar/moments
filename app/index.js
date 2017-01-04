@@ -12,7 +12,7 @@ class App extends Component {
         <Gallery images={[{src: '../../assets/img/beauty.jpg'}]}></Gallery>
         <Upload/>
       </div>
-      )
+    );
   }
 }
 
