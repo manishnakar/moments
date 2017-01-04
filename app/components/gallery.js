@@ -4,6 +4,10 @@ import React, {Component} from 'react';
 import Image from './Image';
 
 class Gallery extends Component {
+  componentDidMount() {
+    
+  }
+
   render() {
     return (
       <div>

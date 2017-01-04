@@ -21573,6 +21573,9 @@
 	  }
 
 	  _createClass(Gallery, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {}
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -21667,25 +21670,54 @@
 	var Upload = function (_Component) {
 	  _inherits(Upload, _Component);
 
-	  function Upload() {
+	  function Upload(props, context) {
 	    _classCallCheck(this, Upload);
 
-	    return _possibleConstructorReturn(this, (Upload.__proto__ || Object.getPrototypeOf(Upload)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Upload.__proto__ || Object.getPrototypeOf(Upload)).call(this, props, context));
+
+	    _this.updateName = _this.updateName.bind(_this);
+	    _this.updateDescription = _this.updateDescription.bind(_this);
+	    _this.uploadImage = _this.uploadImage.bind(_this);
+	    _this.state = {
+	      name: '',
+	      description: ''
+	    };
+	    return _this;
 	  }
 
 	  _createClass(Upload, [{
+	    key: 'uploadImage',
+	    value: function uploadImage(event) {
+	      console.log('uploading image');
+	      // firebase stuff, capture name and description and handle upload
+	    }
+	  }, {
+	    key: 'updateName',
+	    value: function updateName(event) {
+	      this.setState({
+	        name: event.target.value
+	      });
+	    }
+	  }, {
+	    key: 'updateDescription',
+	    value: function updateDescription(event) {
+	      this.setState({
+	        description: event.target.value
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'form',
 	        null,
 	        'Name: ',
-	        _react2.default.createElement('input', { type: 'text' }),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.updateName }),
 	        'Description: ',
-	        _react2.default.createElement('input', { type: 'text' }),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.updateDescription }),
 	        _react2.default.createElement(
 	          'button',
-	          null,
+	          { onClick: this.uploadImage },
 	          'Upload'
 	        )
 	      );
