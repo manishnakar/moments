@@ -21679,8 +21679,13 @@
 	    _this.updateDescription = _this.updateDescription.bind(_this);
 	    _this.uploadImage = _this.uploadImage.bind(_this);
 	    _this.state = {
-	      name: '',
-	      description: ''
+	      newImage: {
+	        id: 0,
+	        // manually set inside of uploadImage
+	        name: '',
+	        description: '',
+	        src: ''
+	      }
 	    };
 	    return _this;
 	  }
@@ -21691,7 +21696,7 @@
 	      console.log('uploading image');
 	      // firebase stuff, capture name and description and handle upload
 	      // add firebase ref, upload to aws s3.
-	      firebase.database.ref('/images/' + newImage.id).set(newImage);
+	      firebase.database.ref('/images/' + this.state.newImage.id).set(this.state.newImage);
 	    }
 	  }, {
 	    key: 'updateName',
