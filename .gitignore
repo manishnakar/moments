@@ -2,7 +2,7 @@
 # Created by https://www.gitignore.io/api/node,osx,windows,linux
 
 db
-.env
+env.js
 data/*
 coverage
 html-report

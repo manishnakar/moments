@@ -4,8 +4,18 @@ import React, {Component} from 'react';
 import Image from './Image';
 
 class Gallery extends Component {
+
   componentDidMount() {
-    
+    console.log('mounted');
+    firebase.database().ref('images/').on('value', (snapshot) => {
+      const currentImages = snapshot.val();
+
+      if (currentImages) {
+        this.setState({
+          images: currentImages,
+        });
+      }
+    });
   }
 
   render() {

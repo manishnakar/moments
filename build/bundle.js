@@ -21690,6 +21690,8 @@
 	    value: function uploadImage(event) {
 	      console.log('uploading image');
 	      // firebase stuff, capture name and description and handle upload
+	      // add firebase ref, upload to aws s3.
+	      firebase.database.ref('/images/' + newImage.id).set(newImage);
 	    }
 	  }, {
 	    key: 'updateName',
