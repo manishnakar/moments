@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
-import config from './config';
 import localConfig from '../env';
 
 import Gallery from './components/Gallery';

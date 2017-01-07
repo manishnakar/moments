@@ -60,10 +60,6 @@
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
-	var _config = __webpack_require__(189);
-
-	var _config2 = _interopRequireDefault(_config);
-
 	var _env = __webpack_require__(190);
 
 	var _env2 = _interopRequireDefault(_env);
@@ -22518,26 +22514,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 189 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var config = {
-	  apiKey: process ? process.env.FIREBASE_API_KEY : FIREBASE_API_KEY,
-	  authDomain: process ? process.env.FIREBASE_AUTH_DOMAIN : FIREBASE_AUTH_DOMAIN,
-	  databaseURL: process ? process.env.FIREBASE_DATABASE_URL : FIREBASE_DATABASE_URL,
-	  storageBucket: process ? process.env.FIREBASE_STORAGE_BUCKET : FIREBASE_STORAGE_BUCKET,
-	  messagingSenderId: process ? process.env.FIREBASE_MESSAGING_SENDER_ID : FIREBASE_MESSAGING_SENDER_ID
-	};
-
-	exports.default = config;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
+/* 189 */,
 /* 190 */
 /***/ function(module, exports) {
 
@@ -22576,7 +22553,7 @@
 
 	var _Image2 = _interopRequireDefault(_Image);
 
-	var _config = __webpack_require__(189);
+	var _config = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../config\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _config2 = _interopRequireDefault(_config);
 
