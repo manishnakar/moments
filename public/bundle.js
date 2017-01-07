@@ -22711,6 +22711,8 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _reactBootstrap = __webpack_require__(194);
+
 	var _firebase = __webpack_require__(183);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
@@ -22780,7 +22782,7 @@
 	        null,
 	        _react2.default.createElement(_NavBar2.default, null),
 	        _react2.default.createElement(
-	          'h1',
+	          _reactBootstrap.PageHeader,
 	          null,
 	          'Moments'
 	        ),

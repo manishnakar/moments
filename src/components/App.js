@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { PageHeader } from 'react-bootstrap';
 import firebase from 'firebase';
 import localConfig from '../../env';
 
@@ -38,7 +39,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <h1>Moments</h1>
+        <PageHeader>Moments</PageHeader>
         <Gallery images={this.state.images} />
         <Upload />
       </div>
