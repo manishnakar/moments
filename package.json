@@ -37,6 +37,7 @@
     "eslint-plugin-react": "^6.8.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
+    "react-addons-test-utils": "^15.4.2",
     "webpack": "^1.14.0"
   },
   "dependencies": {
@@ -45,6 +46,6 @@
     "html-webpack-plugin": "^2.25.0",
     "react": "^15.4.1",
     "react-dev-utils": "^0.4.2",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.2"
   }
 }
