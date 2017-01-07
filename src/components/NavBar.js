@@ -21,13 +21,13 @@ class NavBar extends Component {
            <Nav>
              <NavItem eventKey={1} href="#">Profile</NavItem>
              <NavItem eventKey={2} href="#">Galleries</NavItem>
+           </Nav>
+           <Nav pullRight>
              <NavDropdown eventKey={3} title="About" id="basic-nav-dropdown">
                <MenuItem eventKey={3.1}>Contact</MenuItem>
                <MenuItem eventKey={3.2}>GitHub</MenuItem>
                <MenuItem eventKey={3.3}>LinkedIn</MenuItem>
              </NavDropdown>
-           </Nav>
-           <Nav pullRight>
              <NavItem eventKey={1} href="#">Sign In</NavItem>
              <NavItem eventKey={2} href="#">Log Out</NavItem>
            </Nav>

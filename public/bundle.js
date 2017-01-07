@@ -41697,7 +41697,11 @@
 	              _reactBootstrap.NavItem,
 	              { eventKey: 2, href: '#' },
 	              'Galleries'
-	            ),
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Nav,
+	            { pullRight: true },
 	            _react2.default.createElement(
 	              _reactBootstrap.NavDropdown,
 	              { eventKey: 3, title: 'About', id: 'basic-nav-dropdown' },
@@ -41716,11 +41720,7 @@
 	                { eventKey: 3.3 },
 	                'LinkedIn'
 	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _reactBootstrap.Nav,
-	            { pullRight: true },
+	            ),
 	            _react2.default.createElement(
 	              _reactBootstrap.NavItem,
 	              { eventKey: 1, href: '#' },
