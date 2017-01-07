@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react';
 import Image from './Image';
-import config from '../config';
 
 class Gallery extends Component {
   constructor(props, context) {

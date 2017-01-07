@@ -46,89 +46,13 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _App = __webpack_require__(194);
 
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(32);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _firebase = __webpack_require__(183);
-
-	var _firebase2 = _interopRequireDefault(_firebase);
-
-	var _env = __webpack_require__(190);
-
-	var _env2 = _interopRequireDefault(_env);
-
-	var _Gallery = __webpack_require__(191);
-
-	var _Gallery2 = _interopRequireDefault(_Gallery);
-
-	var _Upload = __webpack_require__(193);
-
-	var _Upload2 = _interopRequireDefault(_Upload);
+	var _App2 = _interopRequireDefault(_App);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var App = function (_Component) {
-	  _inherits(App, _Component);
-
-	  function App(props) {
-	    _classCallCheck(this, App);
-
-	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-
-	    _this.state = {
-	      images: []
-	    };
-
-	    _firebase2.default.initializeApp(_env2.default);
-	    _this.getPhotos();
-	    return _this;
-	  }
-
-	  _createClass(App, [{
-	    key: 'getPhotos',
-	    value: function getPhotos() {
-	      var _this2 = this;
-
-	      var images = [];
-
-	      return _firebase2.default.database().ref('/images').once('value').then(function (snapshot) {
-	        var data = snapshot.val();
-	        for (var image in data) {
-	          images.push(data[image]);
-	        }
-
-	        _this2.setState({ images: images });
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_Gallery2.default, { images: this.state.images }),
-	        _react2.default.createElement(_Upload2.default, null)
-	      );
-	    }
-	  }]);
-
-	  return App;
-	}(_react.Component);
-
-	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
+	ReactDOM.render(React.createElement(_App2.default, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -22567,10 +22491,6 @@
 
 	var _Image2 = _interopRequireDefault(_Image);
 
-	var _config = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../config\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
-	var _config2 = _interopRequireDefault(_config);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22725,6 +22645,100 @@
 	}(_react.Component);
 
 	exports.default = Upload;
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _firebase = __webpack_require__(183);
+
+	var _firebase2 = _interopRequireDefault(_firebase);
+
+	var _env = __webpack_require__(190);
+
+	var _env2 = _interopRequireDefault(_env);
+
+	var _Gallery = __webpack_require__(191);
+
+	var _Gallery2 = _interopRequireDefault(_Gallery);
+
+	var _Upload = __webpack_require__(193);
+
+	var _Upload2 = _interopRequireDefault(_Upload);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var App = function (_Component) {
+	  _inherits(App, _Component);
+
+	  function App(props) {
+	    _classCallCheck(this, App);
+
+	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+	    _this.state = {
+	      images: []
+	    };
+
+	    _firebase2.default.initializeApp(_env2.default);
+	    _this.getPhotos();
+	    return _this;
+	  }
+
+	  _createClass(App, [{
+	    key: 'getPhotos',
+	    value: function getPhotos() {
+	      var _this2 = this;
+
+	      var images = [];
+
+	      return _firebase2.default.database().ref('/images').once('value').then(function (snapshot) {
+	        var data = snapshot.val();
+	        for (var image in data) {
+	          images.push(data[image]);
+	        }
+
+	        _this2.setState({ images: images });
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_Gallery2.default, { images: this.state.images }),
+	        _react2.default.createElement(_Upload2.default, null)
+	      );
+	    }
+	  }]);
+
+	  return App;
+	}(_react.Component);
+
+	exports.default = App;
 
 /***/ }
 /******/ ]);
