@@ -10,15 +10,25 @@ class Auth extends Component {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
     };
 
     this.onInputChange = this.onInputChange.bind(this);
+    this.signUp = this.signUp.bind(this);
   }
 
   signUp() {
-
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+    .then(() => {
+      console.log('success!');
+    })
+    .catch((error) => {
+    // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(error);
+    });
   }
 
   onInputChange(value, field) {
@@ -37,7 +47,7 @@ class Auth extends Component {
             Username:
             </Col>
             <Col sm={10}>
-              <FormControl id="username" type="text" placeholder="Username" onChange={(e) => this.onInputChange(e.target.value, e.target.id)}/>
+              <FormControl id="email" type="email" placeholder="Email" onChange={(e) => this.onInputChange(e.target.value, e.target.id)}/>
             </Col>
           </FormGroup>
 
@@ -52,10 +62,10 @@ class Auth extends Component {
 
           <FormGroup>
             <Col mdOffset={0} sm={4}>
-              <Button onClick={this.logIn} bsStyle="primary" type="submit">
+              <Button onClick={this.logIn} bsStyle="primary">
                 Log In
               </Button>
-              <Button onClick={this.signUp} bsStyle="primary" type="submit">
+              <Button onClick={this.signUp} bsStyle="primary">
                 Sign Up
               </Button>
             </Col>

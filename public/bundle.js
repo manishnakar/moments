@@ -41790,17 +41790,27 @@
 	    var _this = _possibleConstructorReturn(this, (Auth.__proto__ || Object.getPrototypeOf(Auth)).call(this, props));
 
 	    _this.state = {
-	      username: '',
+	      email: '',
 	      password: ''
 	    };
 
 	    _this.onInputChange = _this.onInputChange.bind(_this);
+	    _this.signUp = _this.signUp.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(Auth, [{
 	    key: 'signUp',
-	    value: function signUp() {}
+	    value: function signUp() {
+	      _firebase2.default.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(function () {
+	        console.log('success!');
+	      }).catch(function (error) {
+	        // Handle Errors here.
+	        var errorCode = error.code;
+	        var errorMessage = error.message;
+	        console.log(error);
+	      });
+	    }
 	  }, {
 	    key: 'onInputChange',
 	    value: function onInputChange(value, field) {
@@ -41830,7 +41840,7 @@
 	            _react2.default.createElement(
 	              _reactBootstrap.Col,
 	              { sm: 10 },
-	              _react2.default.createElement(_reactBootstrap.FormControl, { id: 'username', type: 'text', placeholder: 'Username', onChange: function onChange(e) {
+	              _react2.default.createElement(_reactBootstrap.FormControl, { id: 'email', type: 'email', placeholder: 'Email', onChange: function onChange(e) {
 	                  return _this2.onInputChange(e.target.value, e.target.id);
 	                } })
 	            )
@@ -41859,12 +41869,12 @@
 	              { mdOffset: 0, sm: 4 },
 	              _react2.default.createElement(
 	                _reactBootstrap.Button,
-	                { onClick: this.logIn, bsStyle: 'primary', type: 'submit' },
+	                { onClick: this.logIn, bsStyle: 'primary' },
 	                'Log In'
 	              ),
 	              _react2.default.createElement(
 	                _reactBootstrap.Button,
-	                { onClick: this.signUp, bsStyle: 'primary', type: 'submit' },
+	                { onClick: this.signUp, bsStyle: 'primary' },
 	                'Sign Up'
 	              )
 	            )
