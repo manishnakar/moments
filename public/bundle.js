@@ -56,19 +56,23 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _firebase = __webpack_require__(187);
+	var _firebase = __webpack_require__(183);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
-	var _config = __webpack_require__(185);
+	var _config = __webpack_require__(189);
 
 	var _config2 = _interopRequireDefault(_config);
 
-	var _Gallery = __webpack_require__(183);
+	var _env = __webpack_require__(193);
+
+	var _env2 = _interopRequireDefault(_env);
+
+	var _Gallery = __webpack_require__(190);
 
 	var _Gallery2 = _interopRequireDefault(_Gallery);
 
-	var _Upload = __webpack_require__(186);
+	var _Upload = __webpack_require__(192);
 
 	var _Upload2 = _interopRequireDefault(_Upload);
 
@@ -88,7 +92,7 @@
 
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-	    _firebase2.default.initializeApp(_config2.default);
+	    _firebase2.default.initializeApp(_env2.default);
 	    _this.getPhotos();
 	    return _this;
 	  }
@@ -96,9 +100,11 @@
 	  _createClass(App, [{
 	    key: 'getPhotos',
 	    value: function getPhotos() {
+	      var _this2 = this;
+
 	      return _firebase2.default.database().ref('/images').once('value').then(function (snapshot) {
-	        this.setState({ images: snapshot });
-	        console.log(snapshot);
+	        _this2.setState({ images: snapshot });
+	        console.log(snapshot.val());
 	      });
 	    }
 	  }, {
@@ -21825,217 +21831,6 @@
 /* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Image = __webpack_require__(184);
-
-	var _Image2 = _interopRequireDefault(_Image);
-
-	var _config = __webpack_require__(185);
-
-	var _config2 = _interopRequireDefault(_config);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Gallery = function (_Component) {
-	  _inherits(Gallery, _Component);
-
-	  function Gallery(props, context) {
-	    _classCallCheck(this, Gallery);
-
-	    var _this = _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).call(this, props, context));
-
-	    _this.state = {
-	      images: []
-	    };
-
-	    // this.imagesRef = firebase.database().ref('/images');
-	    // this.listenForChanges = this.listenForChanges.bind(this);
-	    return _this;
-	  }
-
-	  // listenForChanges(ref) {
-	  //   ref.once('value')
-	  //   .then((data) => {
-	  //     this.setState({
-	  //       images: data.val(),
-	  //     });
-	  //   });
-	  // }
-
-	  // componentDidMount() {
-	  //   this.listenForChanges(this.imagesRef);
-	  // }
-
-	  _createClass(Gallery, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        this.state.images.map(function (image) {
-	          return _react2.default.createElement(_Image2.default, { key: image.src, src: image.src });
-	        })
-	      );
-	    }
-	  }]);
-
-	  return Gallery;
-	}(_react.Component);
-
-	exports.default = Gallery;
-
-/***/ },
-/* 184 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var image = {};
-
-	var Image = function (_Component) {
-	  _inherits(Image, _Component);
-
-	  function Image() {
-	    _classCallCheck(this, Image);
-
-	    return _possibleConstructorReturn(this, (Image.__proto__ || Object.getPrototypeOf(Image)).apply(this, arguments));
-	  }
-
-	  _createClass(Image, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement('img', { src: this.props.src });
-	    }
-	  }]);
-
-	  return Image;
-	}(_react.Component);
-
-	exports.default = Image;
-
-/***/ },
-/* 185 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var config = {
-	  apiKey: process ? process.env.FIREBASE_API_KEY : FIREBASE_API_KEY,
-	  authDomain: process ? process.env.FIREBASE_AUTH_DOMAIN : FIREBASE_AUTH_DOMAIN,
-	  databaseURL: process ? process.env.FIREBASE_DATABASE_URL : FIREBASE_DATABASE_URL,
-	  storageBucket: process ? process.env.FIREBASE_STORAGE_BUCKET : FIREBASE_STORAGE_BUCKET,
-	  messagingSenderId: process ? process.env.FIREBASE_MESSAGING_SENDER_ID : FIREBASE_MESSAGING_SENDER_ID
-	};
-
-	exports.default = config;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 186 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Upload = function (_Component) {
-	  _inherits(Upload, _Component);
-
-	  function Upload(props, context) {
-	    _classCallCheck(this, Upload);
-
-	    return _possibleConstructorReturn(this, (Upload.__proto__ || Object.getPrototypeOf(Upload)).call(this, props, context));
-	  }
-
-	  _createClass(Upload, [{
-	    key: 'uploadImage',
-	    value: function uploadImage(event) {
-	      console.log('uploading image');
-	      // firebase stuff, capture name and description and handle upload
-	      // add firebase ref, upload to aws s3.
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'form',
-	        null,
-	        'Name: ',
-	        _react2.default.createElement('input', { type: 'text' }),
-	        'Description: ',
-	        _react2.default.createElement('input', { type: 'text' }),
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.uploadImage },
-	          'Upload'
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Upload;
-	}(_react.Component);
-
-	exports.default = Upload;
-
-/***/ },
-/* 187 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/**
 	 *  Firebase libraries for browser - npm package.
 	 *
@@ -22043,16 +21838,16 @@
 	 *
 	 *   firebase = require('firebase');
 	 */
-	var firebase = __webpack_require__(188);
-	__webpack_require__(189);
-	__webpack_require__(190);
-	__webpack_require__(191);
-	__webpack_require__(192);
+	var firebase = __webpack_require__(184);
+	__webpack_require__(185);
+	__webpack_require__(186);
+	__webpack_require__(187);
+	__webpack_require__(188);
 	module.exports = firebase;
 
 
 /***/ },
-/* 188 */
+/* 184 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {var firebase = (function(){
@@ -22092,10 +21887,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 189 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(188);
+	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(184);
 	(function(){
 	/*! @license Firebase v3.6.4
 	    Build: 3.6.4-rc.2
@@ -22338,10 +22133,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 190 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(188);
+	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(184);
 	(function(){
 	/*! @license Firebase v3.6.4
 	    Build: 3.6.4-rc.2
@@ -22609,10 +22404,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 191 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(188);
+	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(184);
 	(function(){
 	/*! @license Firebase v3.6.4
 	    Build: 3.6.4-rc.2
@@ -22667,10 +22462,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 192 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(188);
+	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(184);
 	(function(){
 	/*! @license Firebase v3.6.4
 	    Build: 3.6.4-rc.2
@@ -22711,6 +22506,236 @@
 	module.exports = firebase.messaging;
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var config = {
+	  apiKey: process ? process.env.FIREBASE_API_KEY : FIREBASE_API_KEY,
+	  authDomain: process ? process.env.FIREBASE_AUTH_DOMAIN : FIREBASE_AUTH_DOMAIN,
+	  databaseURL: process ? process.env.FIREBASE_DATABASE_URL : FIREBASE_DATABASE_URL,
+	  storageBucket: process ? process.env.FIREBASE_STORAGE_BUCKET : FIREBASE_STORAGE_BUCKET,
+	  messagingSenderId: process ? process.env.FIREBASE_MESSAGING_SENDER_ID : FIREBASE_MESSAGING_SENDER_ID
+	};
+
+	exports.default = config;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Image = __webpack_require__(191);
+
+	var _Image2 = _interopRequireDefault(_Image);
+
+	var _config = __webpack_require__(189);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Gallery = function (_Component) {
+	  _inherits(Gallery, _Component);
+
+	  function Gallery(props, context) {
+	    _classCallCheck(this, Gallery);
+
+	    var _this = _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).call(this, props, context));
+
+	    _this.state = {
+	      images: []
+	    };
+
+	    // this.imagesRef = firebase.database().ref('/images');
+	    // this.listenForChanges = this.listenForChanges.bind(this);
+	    return _this;
+	  }
+
+	  // listenForChanges(ref) {
+	  //   ref.once('value')
+	  //   .then((data) => {
+	  //     this.setState({
+	  //       images: data.val(),
+	  //     });
+	  //   });
+	  // }
+
+	  // componentDidMount() {
+	  //   this.listenForChanges(this.imagesRef);
+	  // }
+
+	  _createClass(Gallery, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.state.images.map(function (image) {
+	          return _react2.default.createElement(_Image2.default, { key: image.src, src: image.src });
+	        })
+	      );
+	    }
+	  }]);
+
+	  return Gallery;
+	}(_react.Component);
+
+	exports.default = Gallery;
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var image = {};
+
+	var Image = function (_Component) {
+	  _inherits(Image, _Component);
+
+	  function Image() {
+	    _classCallCheck(this, Image);
+
+	    return _possibleConstructorReturn(this, (Image.__proto__ || Object.getPrototypeOf(Image)).apply(this, arguments));
+	  }
+
+	  _createClass(Image, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('img', { src: this.props.src });
+	    }
+	  }]);
+
+	  return Image;
+	}(_react.Component);
+
+	exports.default = Image;
+
+/***/ },
+/* 192 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Upload = function (_Component) {
+	  _inherits(Upload, _Component);
+
+	  function Upload(props, context) {
+	    _classCallCheck(this, Upload);
+
+	    return _possibleConstructorReturn(this, (Upload.__proto__ || Object.getPrototypeOf(Upload)).call(this, props, context));
+	  }
+
+	  _createClass(Upload, [{
+	    key: 'uploadImage',
+	    value: function uploadImage(event) {
+	      console.log('uploading image');
+	      // firebase stuff, capture name and description and handle upload
+	      // add firebase ref, upload to aws s3.
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'form',
+	        null,
+	        'Name: ',
+	        _react2.default.createElement('input', { type: 'text' }),
+	        'Description: ',
+	        _react2.default.createElement('input', { type: 'text' }),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.uploadImage },
+	          'Upload'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Upload;
+	}(_react.Component);
+
+	exports.default = Upload;
+
+/***/ },
+/* 193 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var config = {
+	  apiKey: "AIzaSyD96AV82dEeK1JUbhEqwloWhITM0gxhkgo",
+	  authDomain: "moment-104ef.firebaseapp.com",
+	  databaseURL: "https://moment-104ef.firebaseio.com",
+	  storageBucket: "moment-104ef.appspot.com",
+	  messagingSenderId: "1976231880"
+	};
+
+	exports.default = config;
 
 /***/ }
 /******/ ]);
