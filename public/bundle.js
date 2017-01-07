@@ -62,13 +62,7 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _env = __webpack_require__(189);
-
-	var _env2 = _interopRequireDefault(_env);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	_firebase2.default.initializeApp(_env2.default);
 
 	_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('app'));
 
@@ -22470,25 +22464,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 189 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	var config = {
-	    apiKey: "AIzaSyD96AV82dEeK1JUbhEqwloWhITM0gxhkgo",
-	    authDomain: "moment-104ef.firebaseapp.com",
-	    databaseURL: "https://moment-104ef.firebaseio.com",
-	    storageBucket: "moment-104ef.appspot.com",
-	    messagingSenderId: "1976231880"
-	};
-
-	exports.default = config;
-
-/***/ },
+/* 189 */,
 /* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22705,7 +22681,7 @@
 /* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -22739,6 +22715,10 @@
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
+	var _Auth = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./Auth\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22746,6 +22726,16 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var localConfig = process ? {
+	  apiKey: process.env.API_KEY,
+	  authDomain: process.env.AUTH_DOMAIN,
+	  databaseURL: process.env.DB_URL,
+	  storageBucket: process.env.STORAGE_BUCKET,
+	  messagingSenderId: process.env.MESSAGING_ID
+	} : __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../env\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+	_firebase2.default.initializeApp(localConfig);
 
 	var App = function (_Component) {
 	  _inherits(App, _Component);
@@ -22791,6 +22781,7 @@
 	          null,
 	          'Moments'
 	        ),
+	        _react2.default.createElement(_Auth2.default, null),
 	        _react2.default.createElement(_Gallery2.default, { images: this.state.images }),
 	        _react2.default.createElement(_Upload2.default, null)
 	      );
@@ -22801,6 +22792,7 @@
 	}(_react.Component);
 
 	exports.default = App;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
 /* 194 */

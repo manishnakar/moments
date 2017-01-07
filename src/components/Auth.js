@@ -10,6 +10,10 @@ class Auth extends Component {
     super(props);
   }
 
+  this.signUp() {
+
+  }
+
   render() {
     return (
       <div id="auth">
@@ -35,10 +39,10 @@ class Auth extends Component {
 
           <FormGroup>
             <Col mdOffset={0} sm={4}>
-              <Button onClick={this.login} bsStyle="primary" type="submit">
+              <Button onClick={this.logIn} bsStyle="primary" type="submit">
                 Log In
               </Button>
-              <Button onClick={this.signup} bsStyle="primary" type="submit">
+              <Button onClick={this.signUp} bsStyle="primary" type="submit">
                 Sign Up
               </Button>
             </Col>
