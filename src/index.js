@@ -13,21 +13,31 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      images: [],
+    };
+
     firebase.initializeApp(localConfig);
     this.getPhotos();
   }
 
   getPhotos() {
+    let images = [];
+
     return firebase.database().ref('/images').once('value').then((snapshot) => {
-      this.setState({images: snapshot});
-      console.log(snapshot.val());
+      let data = snapshot.val();
+      for (let image in data) {
+        images.push(data[image]);
+      }
+
+      this.setState({images});
     });
   }
 
   render() {
     return (
       <div>
-        <Gallery/>
+        <Gallery images={this.state.images}/>
         <Upload/>
       </div>
     );

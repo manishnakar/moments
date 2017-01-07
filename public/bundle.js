@@ -64,15 +64,15 @@
 
 	var _config2 = _interopRequireDefault(_config);
 
-	var _env = __webpack_require__(193);
+	var _env = __webpack_require__(190);
 
 	var _env2 = _interopRequireDefault(_env);
 
-	var _Gallery = __webpack_require__(190);
+	var _Gallery = __webpack_require__(191);
 
 	var _Gallery2 = _interopRequireDefault(_Gallery);
 
-	var _Upload = __webpack_require__(192);
+	var _Upload = __webpack_require__(193);
 
 	var _Upload2 = _interopRequireDefault(_Upload);
 
@@ -92,6 +92,10 @@
 
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
+	    _this.state = {
+	      images: []
+	    };
+
 	    _firebase2.default.initializeApp(_env2.default);
 	    _this.getPhotos();
 	    return _this;
@@ -102,9 +106,15 @@
 	    value: function getPhotos() {
 	      var _this2 = this;
 
+	      var images = [];
+
 	      return _firebase2.default.database().ref('/images').once('value').then(function (snapshot) {
-	        _this2.setState({ images: snapshot });
-	        console.log(snapshot.val());
+	        var data = snapshot.val();
+	        for (var image in data) {
+	          images.push(data[image]);
+	        }
+
+	        _this2.setState({ images: images });
 	      });
 	    }
 	  }, {
@@ -113,7 +123,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Gallery2.default, null),
+	        _react2.default.createElement(_Gallery2.default, { images: this.state.images }),
 	        _react2.default.createElement(_Upload2.default, null)
 	      );
 	    }
@@ -22529,6 +22539,25 @@
 
 /***/ },
 /* 190 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var config = {
+	  apiKey: "AIzaSyD96AV82dEeK1JUbhEqwloWhITM0gxhkgo",
+	  authDomain: "moment-104ef.firebaseapp.com",
+	  databaseURL: "https://moment-104ef.firebaseio.com",
+	  storageBucket: "moment-104ef.appspot.com",
+	  messagingSenderId: "1976231880"
+	};
+
+	exports.default = config;
+
+/***/ },
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22543,7 +22572,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Image = __webpack_require__(191);
+	var _Image = __webpack_require__(192);
 
 	var _Image2 = _interopRequireDefault(_Image);
 
@@ -22565,39 +22594,27 @@
 	  function Gallery(props, context) {
 	    _classCallCheck(this, Gallery);
 
-	    var _this = _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).call(this, props, context));
-
-	    _this.state = {
-	      images: []
-	    };
-
-	    // this.imagesRef = firebase.database().ref('/images');
-	    // this.listenForChanges = this.listenForChanges.bind(this);
-	    return _this;
+	    return _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).call(this, props, context));
 	  }
-
-	  // listenForChanges(ref) {
-	  //   ref.once('value')
-	  //   .then((data) => {
-	  //     this.setState({
-	  //       images: data.val(),
-	  //     });
-	  //   });
-	  // }
-
-	  // componentDidMount() {
-	  //   this.listenForChanges(this.imagesRef);
-	  // }
 
 	  _createClass(Gallery, [{
 	    key: 'render',
 	    value: function render() {
+
+	      console.log(this.props.images);
+
+	      var images = this.props.images.map(function (image, i) {
+	        return _react2.default.createElement(_Image2.default, { key: i, src: image.src });
+	      });
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        this.state.images.map(function (image) {
-	          return _react2.default.createElement(_Image2.default, { key: image.src, src: image.src });
-	        })
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          images
+	        )
 	      );
 	    }
 	  }]);
@@ -22608,7 +22625,7 @@
 	exports.default = Gallery;
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22655,7 +22672,7 @@
 	exports.default = Image;
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22717,25 +22734,6 @@
 	}(_react.Component);
 
 	exports.default = Upload;
-
-/***/ },
-/* 193 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var config = {
-	  apiKey: "AIzaSyD96AV82dEeK1JUbhEqwloWhITM0gxhkgo",
-	  authDomain: "moment-104ef.firebaseapp.com",
-	  databaseURL: "https://moment-104ef.firebaseio.com",
-	  storageBucket: "moment-104ef.appspot.com",
-	  messagingSenderId: "1976231880"
-	};
-
-	exports.default = config;
 
 /***/ }
 /******/ ]);
