@@ -49,6 +49,7 @@
     "firebase": "^3.6.4",
     "html-webpack-plugin": "^2.25.0",
     "react": "^15.4.1",
+    "react-bootstrap": "^0.30.7",
     "react-dev-utils": "^0.4.2",
     "react-dom": "^15.4.2"
   }

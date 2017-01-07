@@ -7,6 +7,7 @@ import localConfig from '../../env';
 
 import Gallery from './Gallery';
 import Upload from './Upload';
+import NavBar from './NavBar';
 
 class App extends Component {
   constructor(props) {
@@ -36,8 +37,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Gallery images={this.state.images}/>
-        <Upload/>
+        <NavBar />
+        <h1>Moments</h1>
+        <Gallery images={this.state.images} />
+        <Upload />
       </div>
     );
   }
