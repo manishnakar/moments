@@ -1,11 +1,8 @@
 'use strict';
 
 import React, {Component} from 'react';
-// import firebase from 'firebase';
 import Image from './Image';
 import config from '../config';
-// 
-// firebase.initializeApp(config);
 
 class Gallery extends Component {
   constructor(props, context) {
