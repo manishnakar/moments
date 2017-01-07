@@ -11,7 +11,16 @@ import Upload from './components/Upload';
 class App extends Component {
   constructor(props) {
     super(props);
+
     firebase.initializeApp(config);
+    this.getPhotos();
+  }
+
+  getPhotos() {
+    return firebase.database().ref('/images').once('value').then(function(snapshot) {
+      this.setState({images: snapshot});
+      console.log(snapshot);
+    });
   }
 
   render() {

@@ -89,10 +89,19 @@
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 	    _firebase2.default.initializeApp(_config2.default);
+	    _this.getPhotos();
 	    return _this;
 	  }
 
 	  _createClass(App, [{
+	    key: 'getPhotos',
+	    value: function getPhotos() {
+	      return _firebase2.default.database().ref('/images').once('value').then(function (snapshot) {
+	        this.setState({ images: snapshot });
+	        console.log(snapshot);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
