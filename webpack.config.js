@@ -1,29 +1,31 @@
 'use strict';
 
-const webpack = require('webpack');
+// const HTMLWebpackPlugin = require('html-webpack-plugin');
+//
+// const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
+//   template: `${__dirname}/src/index.html`,
+//   filename: 'index.html',
+//   inject: 'body',
+// });
 
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
-const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
-  template: `${__dirname}/src/index.html`,
-  filename: 'index.html',
-  inject: 'body',
-});
-
-let loadEnvs = new webpack.DefinePlugin({
-  'global': {},
-  'process.env': {
-    'NODE_ENV': "'development'",
-  },
-  'global.GENTLY': false,
-});
+// let loadEnvs = new webpack.DefinePlugin({
+//   'global': {},
+//   'process.env': {
+//     'NODE_ENV': "'development'",
+//   },
+//   'global.GENTLY': false,
+// });
 
 module.exports = {
-  target: 'node',
-  externals: {
-    React: 'react',
-  },
+  // target: 'node',
+  // externals: {
+  //   React: 'react',
+  // },
   entry: `${__dirname}/src/index.js`,
+  output: {
+    filename: 'bundle.js',
+    path: `${__dirname}/public`,
+  },
   module: {
     loaders: [
       {
@@ -31,14 +33,13 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          presets: ['react', 'es2015'],
+          presets: ['react', 'es2015', 'stage-1'],
         },
       },
     ],
   },
-  output: {
-    filename: 'bundle.js',
-    path: `${__dirname}/public`,
+  resolve: {
+    extensions: ['', '.js', 'jsx'],
   },
-  plugins: [HTMLWebpackPluginConfig, loadEnvs, new WatchMissingNodeModulesPlugin(`${__dirname}/node_modules`)],
+  // plugins: [HTMLWebpackPluginConfig],
 };
