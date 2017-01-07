@@ -41636,6 +41636,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactBootstrap = __webpack_require__(194);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41657,12 +41659,72 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'ul',
-	        null,
+	        _reactBootstrap.Navbar,
+	        { inverse: true, collapseOnSelect: true },
 	        _react2.default.createElement(
-	          'li',
+	          _reactBootstrap.Navbar.Header,
 	          null,
-	          'Home'
+	          _react2.default.createElement(
+	            _reactBootstrap.Navbar.Brand,
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#' },
+	              'Moments'
+	            )
+	          ),
+	          _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Navbar.Collapse,
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.Nav,
+	            null,
+	            _react2.default.createElement(
+	              _reactBootstrap.NavItem,
+	              { eventKey: 1, href: '#' },
+	              'Profile'
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.NavItem,
+	              { eventKey: 2, href: '#' },
+	              'Galleries'
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.NavDropdown,
+	              { eventKey: 3, title: 'About', id: 'basic-nav-dropdown' },
+	              _react2.default.createElement(
+	                _reactBootstrap.MenuItem,
+	                { eventKey: 3.1 },
+	                'Contact'
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.MenuItem,
+	                { eventKey: 3.2 },
+	                'GitHub'
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.MenuItem,
+	                { eventKey: 3.3 },
+	                'LinkedIn'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Nav,
+	            { pullRight: true },
+	            _react2.default.createElement(
+	              _reactBootstrap.NavItem,
+	              { eventKey: 1, href: '#' },
+	              'Sign In'
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.NavItem,
+	              { eventKey: 2, href: '#' },
+	              'Log Out'
+	            )
+	          )
 	        )
 	      );
 	    }
