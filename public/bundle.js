@@ -41802,13 +41802,12 @@
 	  _createClass(Auth, [{
 	    key: 'signUp',
 	    value: function signUp() {
+	      var _this2 = this;
+
 	      _firebase2.default.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(function () {
-	        console.log('success!');
+	        _this2.setState({ success: 'Successfully Signed Up!' });
 	      }).catch(function (error) {
-	        // Handle Errors here.
-	        var errorCode = error.code;
-	        var errorMessage = error.message;
-	        console.log(error);
+	        _this2.setState({ error: error.message });
 	      });
 	    }
 	  }, {
@@ -41821,7 +41820,33 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
+	      var _this3 = this;
+
+	      var alert = null;
+
+	      if (this.state.error) {
+	        alert = _react2.default.createElement(
+	          _reactBootstrap.Alert,
+	          { bsStyle: 'warning' },
+	          _react2.default.createElement(
+	            'strong',
+	            null,
+	            this.state.error
+	          )
+	        );
+	      }
+
+	      if (this.state.success) {
+	        alert = _react2.default.createElement(
+	          _reactBootstrap.Alert,
+	          { bsStyle: 'success' },
+	          _react2.default.createElement(
+	            'strong',
+	            null,
+	            this.state.success
+	          )
+	        );
+	      }
 
 	      return _react2.default.createElement(
 	        'div',
@@ -41841,7 +41866,7 @@
 	              _reactBootstrap.Col,
 	              { sm: 10 },
 	              _react2.default.createElement(_reactBootstrap.FormControl, { id: 'email', type: 'email', placeholder: 'Email', onChange: function onChange(e) {
-	                  return _this2.onInputChange(e.target.value, e.target.id);
+	                  return _this3.onInputChange(e.target.value, e.target.id);
 	                } })
 	            )
 	          ),
@@ -41857,7 +41882,7 @@
 	              _reactBootstrap.Col,
 	              { sm: 10 },
 	              _react2.default.createElement(_reactBootstrap.FormControl, { id: 'password', type: 'password', placeholder: 'Password', onChange: function onChange(e) {
-	                  return _this2.onInputChange(e.target.value, e.target.id);
+	                  return _this3.onInputChange(e.target.value, e.target.id);
 	                } })
 	            )
 	          ),
@@ -41878,7 +41903,8 @@
 	                'Sign Up'
 	              )
 	            )
-	          )
+	          ),
+	          alert
 	        )
 	      );
 	    }

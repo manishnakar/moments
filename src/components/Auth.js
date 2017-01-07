@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import firebaseui from 'firebaseui';
-import { Form, FormGroup, FormControl, Col, ControlLabel, Button } from 'react-bootstrap';
+import { Alert, Form, FormGroup, FormControl, Col, ControlLabel, Button } from 'react-bootstrap';
 
 class Auth extends Component {
   constructor(props) {
@@ -21,13 +21,10 @@ class Auth extends Component {
   signUp() {
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
     .then(() => {
-      console.log('success!');
+      this.setState({success: 'Successfully Signed Up!'});
     })
     .catch((error) => {
-    // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(error);
+      this.setState({error: error.message});
     });
   }
 
@@ -38,6 +35,25 @@ class Auth extends Component {
   }
 
   render() {
+
+    let alert = null;
+
+    if (this.state.error) {
+      alert = (
+      <Alert bsStyle="warning">
+        <strong>{this.state.error}</strong>
+      </Alert>
+      );
+    }
+
+    if (this.state.success) {
+      alert = (
+      <Alert bsStyle="success">
+        <strong>{this.state.success}</strong>
+      </Alert>
+      );
+    }
+
     return (
       <div id="auth">
         <Form horizontal>
@@ -71,7 +87,10 @@ class Auth extends Component {
             </Col>
           </FormGroup>
 
+          {alert}
+
         </Form>
+
       </div>
     );
   }
