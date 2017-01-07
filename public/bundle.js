@@ -41787,15 +41787,32 @@
 	  function Auth(props) {
 	    _classCallCheck(this, Auth);
 
-	    return _possibleConstructorReturn(this, (Auth.__proto__ || Object.getPrototypeOf(Auth)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Auth.__proto__ || Object.getPrototypeOf(Auth)).call(this, props));
+
+	    _this.state = {
+	      username: '',
+	      password: ''
+	    };
+
+	    _this.onInputChange = _this.onInputChange.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(Auth, [{
 	    key: 'signUp',
 	    value: function signUp() {}
 	  }, {
+	    key: 'onInputChange',
+	    value: function onInputChange(value, field) {
+	      var state = {};
+	      state[field] = value;
+	      this.setState(state);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'auth' },
@@ -41813,7 +41830,9 @@
 	            _react2.default.createElement(
 	              _reactBootstrap.Col,
 	              { sm: 10 },
-	              _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Username' })
+	              _react2.default.createElement(_reactBootstrap.FormControl, { id: 'username', type: 'text', placeholder: 'Username', onChange: function onChange(e) {
+	                  return _this2.onInputChange(e.target.value, e.target.id);
+	                } })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -41827,7 +41846,9 @@
 	            _react2.default.createElement(
 	              _reactBootstrap.Col,
 	              { sm: 10 },
-	              _react2.default.createElement(_reactBootstrap.FormControl, { type: 'password', placeholder: 'Password' })
+	              _react2.default.createElement(_reactBootstrap.FormControl, { id: 'password', type: 'password', placeholder: 'Password', onChange: function onChange(e) {
+	                  return _this2.onInputChange(e.target.value, e.target.id);
+	                } })
 	            )
 	          ),
 	          _react2.default.createElement(

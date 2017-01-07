@@ -8,10 +8,23 @@ import { Form, FormGroup, FormControl, Col, ControlLabel, Button } from 'react-b
 class Auth extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      username: '',
+      password: '',
+    };
+
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
   signUp() {
 
+  }
+
+  onInputChange(value, field) {
+    let state = {};
+    state[field] = value;
+    this.setState(state);
   }
 
   render() {
@@ -24,7 +37,7 @@ class Auth extends Component {
             Username:
             </Col>
             <Col sm={10}>
-              <FormControl type="text" placeholder="Username" />
+              <FormControl id="username" type="text" placeholder="Username" onChange={(e) => this.onInputChange(e.target.value, e.target.id)}/>
             </Col>
           </FormGroup>
 
@@ -33,7 +46,7 @@ class Auth extends Component {
             Password:
             </Col>
             <Col sm={10}>
-              <FormControl type="password" placeholder="Password" />
+              <FormControl id="password" type="password" placeholder="Password" onChange={(e) => this.onInputChange(e.target.value, e.target.id)}/>
             </Col>
           </FormGroup>
 
