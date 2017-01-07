@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Gallery images={[{src: '../../assets/img/beauty.jpg'}]}></Gallery>
+        <Gallery/>
         <Upload/>
       </div>
     );

@@ -21,7 +21,8 @@
     "jasmine": true
   },
   "globals": {
-    "document": true
+    "document": true,
+    "firebase": true,
   },
   "ecmaFeatures": {
     "modules": true,

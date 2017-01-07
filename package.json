@@ -40,10 +40,10 @@
   },
   "dependencies": {
     "debug": "^2.4.5",
-    "dotenv": "^2.0.0",
     "firebase": "^3.6.4",
     "html-webpack-plugin": "^2.25.0",
     "react": "^15.4.1",
+    "react-dev-utils": "^0.4.2",
     "react-dom": "^15.4.1"
   }
 }
