@@ -54,11 +54,21 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _firebase = __webpack_require__(183);
+
+	var _firebase2 = _interopRequireDefault(_firebase);
+
 	var _App = __webpack_require__(193);
 
 	var _App2 = _interopRequireDefault(_App);
 
+	var _env = __webpack_require__(189);
+
+	var _env2 = _interopRequireDefault(_env);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	_firebase2.default.initializeApp(_env2.default);
 
 	_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('app'));
 
@@ -22466,14 +22476,14 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	var config = {
-	  apiKey: "AIzaSyD96AV82dEeK1JUbhEqwloWhITM0gxhkgo",
-	  authDomain: "moment-104ef.firebaseapp.com",
-	  databaseURL: "https://moment-104ef.firebaseio.com",
-	  storageBucket: "moment-104ef.appspot.com",
-	  messagingSenderId: "1976231880"
+	    apiKey: "AIzaSyD96AV82dEeK1JUbhEqwloWhITM0gxhkgo",
+	    authDomain: "moment-104ef.firebaseapp.com",
+	    databaseURL: "https://moment-104ef.firebaseio.com",
+	    storageBucket: "moment-104ef.appspot.com",
+	    messagingSenderId: "1976231880"
 	};
 
 	exports.default = config;
@@ -22717,10 +22727,6 @@
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
-	var _env = __webpack_require__(189);
-
-	var _env2 = _interopRequireDefault(_env);
-
 	var _Gallery = __webpack_require__(190);
 
 	var _Gallery2 = _interopRequireDefault(_Gallery);
@@ -22753,7 +22759,6 @@
 	      images: []
 	    };
 
-	    _firebase2.default.initializeApp(_env2.default);
 	    _this.getPhotos();
 	    return _this;
 	  }

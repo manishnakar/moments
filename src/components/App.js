@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { PageHeader } from 'react-bootstrap';
 import firebase from 'firebase';
-import localConfig from '../../env';
 
 import Gallery from './Gallery';
 import Upload from './Upload';
@@ -18,7 +17,6 @@ class App extends Component {
       images: [],
     };
 
-    firebase.initializeApp(localConfig);
     this.getPhotos();
   }
 
