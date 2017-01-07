@@ -8,6 +8,17 @@ import firebase from 'firebase';
 import Gallery from './Gallery';
 import Upload from './Upload';
 import NavBar from './NavBar';
+import Auth from './Auth';
+
+let localConfig = process ? {
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  databaseURL: process.env.DB_URL,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_ID,
+} : require('../env');
+
+firebase.initializeApp(localConfig);
 
 class App extends Component {
   constructor(props) {
@@ -38,6 +49,7 @@ class App extends Component {
       <div>
         <NavBar />
         <PageHeader>Moments</PageHeader>
+        <Auth />
         <Gallery images={this.state.images} />
         <Upload />
       </div>
