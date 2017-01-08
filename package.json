@@ -18,7 +18,7 @@
     "url": "git+https://github.com/stefuhnee/moments.git"
   },
   "keywords": [
-    "blog"
+    "blog", "react", "firebase", "aws", "s3"
   ],
   "author": "stefuhnee@gmail.com",
   "license": "MIT",
