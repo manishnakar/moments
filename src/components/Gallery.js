@@ -34,7 +34,7 @@ class Gallery extends Component {
       <div>
         <ul>
           {images}
-          <Upload />
+          <Upload galleryId={this.props.gallery} />
         </ul>
       </div>
     );

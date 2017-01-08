@@ -50,7 +50,13 @@ class App extends Component {
 
   getGalleries() {
     firebase.database().ref(`users/${this.state.user}`).once('value')
-    .then((snapshot) => this.setState({galleries: snapshot.val().galleries}))
+    .then(snapshot => {
+      if (snapshot.val()) {
+        this.setState({
+          galleries: snapshot.val().galleries || [],
+        });
+      }
+    })
     .catch(console.error);
   }
 

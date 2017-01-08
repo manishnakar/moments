@@ -7,10 +7,40 @@ import { Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap
 class Upload extends Component {
   constructor(props, context) {
     super(props, context);
+
+    this.state = {
+      imageName: '',
+      imageDesc: '',
+      imageKey: '',
+    };
+
+    this.onInputChange = this.onInputChange.bind(this);
+    this.uploadImage = this.uploadImage.bind(this);
+  }
+
+  onInputChange(value, field) {
+    let state = {};
+    state[field] = value;
+    this.setState(state);
   }
 
   uploadImage(event) {
-    console.log('uploading image');
+    let newGalleryRef = firebase.database().ref('images/').push();
+    this.setState({imageKey: newGalleryRef.key});
+    newGalleryRef.set({
+      name: this.state.imageName,
+      desc: this.state.imageDesc,
+    })
+    .then(() => firebase.database().ref(`galleries/${this.props.galleryId}`).once('value'))
+    .then(snapshot => {
+      let images = snapshot.val().images || [];
+      images.push(this.state.imageKey);
+      return images;
+    })
+    .then(images => {
+      firebase.database().ref(`users/${this.props.galleryId}`).set({images});
+    })
+    .catch((err) => console.error(err));
     // firebase stuff, capture name and description and handle upload
     // add firebase ref, upload to aws s3.
   }
@@ -25,7 +55,7 @@ class Upload extends Component {
             Name:
             </Col>
             <Col sm={10}>
-              <FormControl type="text" placeholder="Name" />
+              <FormControl type="text" placeholder="Name" id="imageName" onChange={(e) => this.onInputChange(e.target.value, e.target.id)}/>
             </Col>
           </FormGroup>
 
@@ -34,7 +64,7 @@ class Upload extends Component {
             Description:
             </Col>
             <Col sm={10}>
-              <FormControl type="text" placeholder="Description" />
+              <FormControl type="text" placeholder="Description" id="imageDesc" onChange={(e) => this.onInputChange(e.target.value, e.target.id)} />
             </Col>
           </FormGroup>
 

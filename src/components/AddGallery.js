@@ -33,8 +33,11 @@ class AddGallery extends Component {
     })
     .then(() => firebase.database().ref(`users/${this.props.userId}`).once('value'))
     .then(snapshot => {
-      let galleries = snapshot.val().galleries || [];
-      galleries.push(this.state.galleryKey);
+      let galleries = [];
+      if (snapshot.val()) {
+        galleries = snapshot.val().galleries || [];
+        galleries.push(this.state.galleryKey);
+      }
       return galleries;
     })
     .then(galleries => {

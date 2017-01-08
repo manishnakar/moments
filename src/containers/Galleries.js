@@ -14,7 +14,7 @@ class Galleries extends Component {
 
   render() {
 
-    let galleries = this.props.galleries.map((gallery, i) => {
+    let galleries = !this.props.galleries ? [] : this.props.galleries.map((gallery, i) => {
       return (
         <Gallery key={gallery} gallery={gallery} />
       );
