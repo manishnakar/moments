@@ -10,20 +10,35 @@ class Galleries extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      galleries: [],
+    };
+
+    this.updateGalleries = this.updateGalleries.bind(this);
+    this.setState({galleries: this.props.galleries});
+  }
+
+  updateGalleries(galleries) {
+    this.setState({galleries});
   }
 
   render() {
-
-    let galleries = !this.props.galleries ? [] : this.props.galleries.map((gallery, i) => {
+    // galleries is currently an array of string IDs
+    let galleries = this.state.galleries.map(gallery => {
+      console.log(gallery);
       return (
-        <Gallery key={gallery} gallery={gallery} />
+        <div>
+          <h1>Name: {gallery.name}</h1>
+          <h1>Description: {gallery.desc}</h1>
+        </div>
+        // <Gallery key={gallery} gallery={gallery} />
       );
     });
 
     return (
       <div>
         {galleries}
-        <AddGallery userId={this.props.userId}/>
+        <AddGallery userId={this.props.userId} updateGalleries={this.updateGalleries}/>
       </div>
     );
   }

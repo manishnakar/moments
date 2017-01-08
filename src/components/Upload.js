@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import { Button } from 'react-bootstrap';
 import { Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
+import firebase from 'firebase';
 
 class Upload extends Component {
   constructor(props, context) {
