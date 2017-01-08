@@ -22728,9 +22728,9 @@
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
-	var _Auth = __webpack_require__(447);
+	var _AuthModal = __webpack_require__(449);
 
-	var _Auth2 = _interopRequireDefault(_Auth);
+	var _AuthModal2 = _interopRequireDefault(_AuthModal);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22759,10 +22759,12 @@
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 	    _this.state = {
-	      images: []
+	      images: [],
+	      signingIn: false
 	    };
 
 	    _this.getPhotos();
+	    _this.signIn = _this.signIn.bind(_this);
 	    return _this;
 	  }
 
@@ -22783,18 +22785,28 @@
 	      });
 	    }
 	  }, {
+	    key: 'signIn',
+	    value: function signIn() {
+	      this.setState({ signingIn: true });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var signingIn = false;
+	      if (this.state.signingIn) {
+	        signingIn = _react2.default.createElement(_AuthModal2.default, null);
+	      }
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_NavBar2.default, null),
+	        _react2.default.createElement(_NavBar2.default, { signIn: this.signIn }),
 	        _react2.default.createElement(
 	          _reactBootstrap.PageHeader,
 	          null,
 	          'Moments'
 	        ),
-	        _react2.default.createElement(_Auth2.default, null),
+	        signingIn,
 	        _react2.default.createElement(_Gallery2.default, { images: this.state.images }),
 	        _react2.default.createElement(_Upload2.default, null)
 	      );
@@ -41728,7 +41740,7 @@
 	            ),
 	            _react2.default.createElement(
 	              _reactBootstrap.NavItem,
-	              { eventKey: 1, href: '#' },
+	              { eventKey: 1, href: '#', onClick: this.props.signIn },
 	              'Sign In'
 	            ),
 	            _react2.default.createElement(
@@ -41796,6 +41808,7 @@
 
 	    _this.onInputChange = _this.onInputChange.bind(_this);
 	    _this.signUp = _this.signUp.bind(_this);
+	    _this.logIn = _this.logIn.bind(_this);
 	    return _this;
 	  }
 
@@ -41811,6 +41824,17 @@
 	      });
 	    }
 	  }, {
+	    key: 'logIn',
+	    value: function logIn() {
+	      var _this3 = this;
+
+	      _firebase2.default.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(function () {
+	        _this3.setState({ success: 'Successfully Logged In!' });
+	      }).catch(function (error) {
+	        _this3.setState({ error: error.message });
+	      });
+	    }
+	  }, {
 	    key: 'onInputChange',
 	    value: function onInputChange(value, field) {
 	      var state = {};
@@ -41820,7 +41844,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
+	      var _this4 = this;
 
 	      var alert = null;
 
@@ -41866,7 +41890,7 @@
 	              _reactBootstrap.Col,
 	              { sm: 10 },
 	              _react2.default.createElement(_reactBootstrap.FormControl, { id: 'email', type: 'email', placeholder: 'Email', onChange: function onChange(e) {
-	                  return _this3.onInputChange(e.target.value, e.target.id);
+	                  return _this4.onInputChange(e.target.value, e.target.id);
 	                } })
 	            )
 	          ),
@@ -41882,7 +41906,7 @@
 	              _reactBootstrap.Col,
 	              { sm: 10 },
 	              _react2.default.createElement(_reactBootstrap.FormControl, { id: 'password', type: 'password', placeholder: 'Password', onChange: function onChange(e) {
-	                  return _this3.onInputChange(e.target.value, e.target.id);
+	                  return _this4.onInputChange(e.target.value, e.target.id);
 	                } })
 	            )
 	          ),
@@ -42162,6 +42186,69 @@
 	v("iPad")||v("iPod"))&&b.navigator&&b.navigator.standalone&&d&&"_self"!=d?(e=b.document.createElement("A"),a=a instanceof ob?a:sb(a),e.href=qb(a),e.setAttribute("target",d),c.noreferrer&&e.setAttribute("rel","noreferrer"),c=document.createEvent("MouseEvent"),c.initMouseEvent("click",!0,!0,b,1),e.dispatchEvent(c),e={}):c.noreferrer?(e=b.open("",d,e),b=qb(a),e&&(ab&&-1!=b.indexOf(";")&&(b="'"+b.replace(/'/g,"%27")+"'"),e.opener=null,b='<META HTTP-EQUIV="refresh" content="0; url='+ra(b)+'">',e.document.write(wb((new ub).dd(b))),
 	e.document.close())):e=b.open(qb(a),d,e);e&&e.focus()}else window.location.assign(a)};na("firebaseui.auth.AuthUI",vj);na("firebaseui.auth.AuthUI.prototype.start",vj.prototype.start);na("firebaseui.auth.AuthUI.prototype.setConfig",vj.prototype.zb);na("firebaseui.auth.AuthUI.prototype.signIn",vj.prototype.td);na("firebaseui.auth.AuthUI.prototype.reset",vj.prototype.reset);na("firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM",vh);na("firebaseui.auth.CredentialHelper.NONE","none")})(); })();module.exports=firebaseui;
 
+
+/***/ },
+/* 449 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(194);
+
+	var _Auth = __webpack_require__(447);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function AuthModal() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'static-modal' },
+	    _react2.default.createElement(
+	      _reactBootstrap.Modal.Dialog,
+	      null,
+	      _react2.default.createElement(
+	        _reactBootstrap.Modal.Header,
+	        null,
+	        _react2.default.createElement(
+	          _reactBootstrap.Modal.Title,
+	          null,
+	          'Sign In'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        _reactBootstrap.Modal.Body,
+	        null,
+	        _react2.default.createElement(_Auth2.default, null)
+	      ),
+	      _react2.default.createElement(
+	        _reactBootstrap.Modal.Footer,
+	        null,
+	        _react2.default.createElement(
+	          _reactBootstrap.Button,
+	          null,
+	          'Close'
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Button,
+	          { bsStyle: 'primary' },
+	          'Save changes'
+	        )
+	      )
+	    )
+	  );
+	}
+
+	exports.default = AuthModal;
 
 /***/ }
 /******/ ]);

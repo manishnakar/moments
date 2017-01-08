@@ -8,7 +8,7 @@ import firebase from 'firebase';
 import Gallery from './Gallery';
 import Upload from './Upload';
 import NavBar from './NavBar';
-import Auth from './Auth';
+import AuthModal from '../containers/AuthModal';
 
 let localConfig = process.env.API_KEY ? {
   apiKey: process.env.API_KEY,
@@ -26,9 +26,11 @@ class App extends Component {
 
     this.state = {
       images: [],
+      signingIn: false,
     };
 
     this.getPhotos();
+    this.signIn = this.signIn.bind(this);
   }
 
   getPhotos() {
@@ -44,12 +46,21 @@ class App extends Component {
     });
   }
 
+  signIn() {
+    this.setState({signingIn: true});
+  }
+
   render() {
+    let signingIn = false;
+    if (this.state.signingIn) {
+      signingIn = <AuthModal />;
+    }
+
     return (
       <div>
-        <NavBar />
+        <NavBar signIn={this.signIn}/>
         <PageHeader>Moments</PageHeader>
-        <Auth />
+        {signingIn}
         <Gallery images={this.state.images} />
         <Upload />
       </div>

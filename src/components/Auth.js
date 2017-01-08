@@ -16,12 +16,23 @@ class Auth extends Component {
 
     this.onInputChange = this.onInputChange.bind(this);
     this.signUp = this.signUp.bind(this);
+    this.logIn = this.logIn.bind(this);
   }
 
   signUp() {
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
     .then(() => {
       this.setState({success: 'Successfully Signed Up!'});
+    })
+    .catch((error) => {
+      this.setState({error: error.message});
+    });
+  }
+
+  logIn() {
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+    .then(() => {
+      this.setState({success: 'Successfully Logged In!'});
     })
     .catch((error) => {
       this.setState({error: error.message});

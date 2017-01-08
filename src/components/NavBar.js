@@ -28,7 +28,7 @@ class NavBar extends Component {
                <MenuItem eventKey={3.2}>GitHub</MenuItem>
                <MenuItem eventKey={3.3}>LinkedIn</MenuItem>
              </NavDropdown>
-             <NavItem eventKey={1} href="#">Sign In</NavItem>
+             <NavItem eventKey={1} href="#" onClick={ this.props.signIn}>Sign In</NavItem>
              <NavItem eventKey={2} href="#">Log Out</NavItem>
            </Nav>
          </Navbar.Collapse>

@@ -12,11 +12,7 @@ ul {
 
 #upload, #auth {
   margin: 0 auto;
-  width: 80%;
 }
 
 @media screen and (min-width: 560px) {
-  #upload, #auth {
-    width: 50%;
-  }
 }
