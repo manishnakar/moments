@@ -23,9 +23,9 @@ class Galleries extends Component {
     return firebase.database().ref('/galleries').once('value').then((snapshot) => {
       let data = snapshot.val();
       for (let gallery in data) {
+        data[gallery].id = gallery;
         galleries.push(data[gallery]);
       }
-
       this.setState({galleries});
     });
   }
@@ -33,9 +33,8 @@ class Galleries extends Component {
   render() {
 
     let galleries = this.state.galleries.map((gallery, i) => {
-      console.log(gallery);
       return (
-        <Gallery key={i} galleryId={i} gallery={gallery} />
+        <Gallery key={gallery.id} images={gallery.images} gallery={gallery} />
       );
     });
 

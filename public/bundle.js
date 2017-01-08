@@ -22528,19 +22528,14 @@
 	  _createClass(Gallery, [{
 	    key: 'getPhotos',
 	    value: function getPhotos() {
-	      var _this2 = this;
-
 	      var images = null;
 
-	      return _firebase2.default.database().ref('/galleries/' + this.props.galleryId).once('value').then(function (snapshot) {
-	        var data = snapshot.val();
-	        console.log(data);
-	        for (var image in data.images) {
-	          images.push(data[image]);
-	        }
-
-	        _this2.setState({ images: images });
+	      this.props.images.map(function (image) {
+	        console.log(image);
+	        // use the image IDs coming in on the gallery to look them up one by one in firebase and then add them to an array.
 	      });
+
+	      this.setState({ images: images });
 	    }
 	  }, {
 	    key: 'render',
@@ -42344,9 +42339,9 @@
 	      return _firebase2.default.database().ref('/galleries').once('value').then(function (snapshot) {
 	        var data = snapshot.val();
 	        for (var gallery in data) {
+	          data[gallery].id = gallery;
 	          galleries.push(data[gallery]);
 	        }
-
 	        _this2.setState({ galleries: galleries });
 	      });
 	    }
@@ -42355,8 +42350,7 @@
 	    value: function render() {
 
 	      var galleries = this.state.galleries.map(function (gallery, i) {
-	        console.log(gallery);
-	        return _react2.default.createElement(_Gallery2.default, { key: i, galleryId: i, gallery: gallery });
+	        return _react2.default.createElement(_Gallery2.default, { key: gallery.id, images: gallery.images, gallery: gallery });
 	      });
 
 	      return _react2.default.createElement(

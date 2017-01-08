@@ -19,15 +19,13 @@ class Gallery extends Component {
   getPhotos() {
     let images = null;
 
-    return firebase.database().ref(`/galleries/${this.props.galleryId}`).once('value').then((snapshot) => {
-      let data = snapshot.val();
-      console.log(data);
-      for (let image in data.images) {
-        images.push(data[image]);
-      }
-
-      this.setState({images});
+    this.props.images.map((image) => {
+      console.log(image);
+      // use the image IDs coming in on the gallery to look them up one by one in firebase and then add them to an array.
     });
+
+
+    this.setState({images});
   }
 
 
