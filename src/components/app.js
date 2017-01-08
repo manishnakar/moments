@@ -6,6 +6,7 @@ import { PageHeader } from 'react-bootstrap';
 import firebase from 'firebase';
 
 import Galleries from '../containers/galleries';
+import Gallery from './gallery';
 import NavBar from './nav-bar';
 import AuthModal from '../containers/auth-modal';
 
@@ -27,10 +28,12 @@ class App extends Component {
       galleries: null,
       signingIn: false,
       user: null,
+      selectedGallery: null,
     };
 
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
+    this.handleSelectGallery = this.handleSelectGallery.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.getGalleries = this.getGalleries.bind(this);
     this.authListener = this.authListener.bind(this);
@@ -67,8 +70,12 @@ class App extends Component {
 
   handleSignOut() {
     firebase.auth().signOut()
-    .then(() => this.setState({user: null, galleries: null}))
+    .then(() => this.setState({user: null, galleries: null, selectedGallery: null}))
     .catch(err => console.log(err));
+  }
+
+  handleSelectGallery(galleryId) {
+    this.setState({selectedGallery: galleryId});
   }
 
   getGalleries() {
@@ -87,14 +94,20 @@ class App extends Component {
   render() {
     let inProcessOfSigningIn = false;
     let signedIn = false;
+    let selectedGallery = false;
 
     if (this.state.signingIn) {
       inProcessOfSigningIn = <AuthModal closeModal={this.closeModal} />;
     }
 
-    if (this.state.user && this.state.galleries) {
+    if (this.state.user && this.state.galleries &&!this.state.selectedGallery) {
       signedIn = (
-        <Galleries userId={this.state.user} galleries={this.state.galleries}/>
+        <Galleries userId={this.state.user} galleries={this.state.galleries} selectGallery={this.handleSelectGallery}/>
+      );
+    }
+    if (this.state.selectedGallery) {
+      selectedGallery = (
+        <Gallery galleryId={this.state.selectedGallery}/>
       );
     }
 
@@ -104,6 +117,7 @@ class App extends Component {
         <PageHeader>Moments</PageHeader>
         {inProcessOfSigningIn}
         {signedIn}
+        {selectedGallery}
       </div>
     );
   }

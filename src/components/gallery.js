@@ -16,8 +16,8 @@ class Gallery extends Component {
   }
 
   getPhotos() {
-    console.log(this.props.gallery)
-    firebase.database().ref(`galleries/${this.props.gallery}`).once('value')
+    console.log(this.props.galleryId);
+    firebase.database().ref(`galleries/${this.props.galleryId}`).once('value')
     .then((snapshot) => this.setState({images: snapshot.val().images}))
     .catch(console.error);
   }

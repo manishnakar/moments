@@ -24,11 +24,11 @@ class Galleries extends Component {
   render() {
 
     let galleries = this.props.galleries.map(gallery => {
-      return <GalleryThumbnail key={gallery} gallery={gallery}/>;
+      return <GalleryThumbnail key={gallery} gallery={gallery} selectGallery={this.props.selectGallery}/>;
     });
 
     return (
-      <div id="galleries">  
+      <div id="galleries">
         <div id="galleries-container">
           {galleries}
         </div>

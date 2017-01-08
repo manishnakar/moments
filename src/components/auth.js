@@ -33,7 +33,7 @@ class Auth extends Component {
   logIn() {
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
     .then(() => {
-      this.setState({success: 'Successfully Logged In!'})
+      this.setState({success: 'Successfully Logged In!'});
     })
     .catch(error => this.setState({error: error.message}));
   }

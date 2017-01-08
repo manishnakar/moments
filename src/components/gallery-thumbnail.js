@@ -18,15 +18,14 @@ class GalleryThumbnail extends Component {
     .then(snapshot => this.setState({gallery: snapshot.val()}))
     .catch(console.error);
   }
-
   render() {
     return (
       <Thumbnail src="" alt="" id="gallery-thumbnail">
         <h3>{this.state.gallery.name}</h3>
         <p>{this.state.gallery.desc}</p>
         <p>
-          <Button bsStyle="primary">Button</Button>&nbsp;
-          <Button bsStyle="default">Button</Button>
+          <Button bsStyle="primary" onClick={() => this.props.selectGallery(this.props.gallery)}>View/Edit</Button>&nbsp;
+          <Button bsStyle="default">Delete</Button>
         </p>
       </Thumbnail>
     );
