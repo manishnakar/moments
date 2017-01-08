@@ -18,14 +18,14 @@ class Gallery extends Component {
 
   getPhotos() {
     let images = null;
+    //
+    // this.props.images.map((image) => {
+    //   console.log(image);
+    //   // use the image IDs coming in on the gallery to look them up one by one in firebase and then add them to an array.
+    // });
 
-    this.props.images.map((image) => {
-      console.log(image);
-      // use the image IDs coming in on the gallery to look them up one by one in firebase and then add them to an array.
-    });
-
-
-    this.setState({images});
+    // 
+    // this.setState({images});
   }
 
 

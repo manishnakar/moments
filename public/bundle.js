@@ -22529,13 +22529,14 @@
 	    key: 'getPhotos',
 	    value: function getPhotos() {
 	      var images = null;
+	      //
+	      // this.props.images.map((image) => {
+	      //   console.log(image);
+	      //   // use the image IDs coming in on the gallery to look them up one by one in firebase and then add them to an array.
+	      // });
 
-	      this.props.images.map(function (image) {
-	        console.log(image);
-	        // use the image IDs coming in on the gallery to look them up one by one in firebase and then add them to an array.
-	      });
-
-	      this.setState({ images: images });
+	      // 
+	      // this.setState({images});
 	    }
 	  }, {
 	    key: 'render',
@@ -22786,11 +22787,13 @@
 
 	    _this.state = {
 	      galleries: [],
-	      signingIn: false
+	      signingIn: false,
+	      user: null
 	    };
 
 	    _this.signIn = _this.signIn.bind(_this);
 	    _this.closeModal = _this.closeModal.bind(_this);
+	    _this.getUser = _this.getUser.bind(_this);
 	    return _this;
 	  }
 
@@ -22805,12 +22808,17 @@
 	      this.setState({ signingIn: true });
 	    }
 	  }, {
+	    key: 'getUser',
+	    value: function getUser(user) {
+	      this.setState({ user: user });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 
 	      var signingIn = false;
 	      if (this.state.signingIn) {
-	        signingIn = _react2.default.createElement(_AuthModal2.default, { closeModal: this.closeModal });
+	        signingIn = _react2.default.createElement(_AuthModal2.default, { closeModal: this.closeModal, getUser: this.getUser });
 	      }
 
 	      return _react2.default.createElement(
@@ -22823,7 +22831,7 @@
 	          'Moments'
 	        ),
 	        signingIn,
-	        _react2.default.createElement(_Galleries2.default, null),
+	        _react2.default.createElement(_Galleries2.default, { userId: this.state.user }),
 	        _react2.default.createElement(_Upload2.default, null)
 	      );
 	    }
@@ -41849,8 +41857,13 @@
 	    value: function signUp() {
 	      var _this2 = this;
 
-	      _firebase2.default.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(function () {
+	      _firebase2.default.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(function (user) {
+	        console.log(user);
+	        _firebase2.default.database().ref('users/' + user.uid).set({
+	          email: _this2.state.email
+	        });
 	        _this2.setState({ success: 'Successfully Signed Up!' });
+	        _this2.props.getUser(user.uid);
 	      }).catch(function (error) {
 	        _this2.setState({ error: error.message });
 	      });
@@ -42260,7 +42273,7 @@
 	      _react2.default.createElement(
 	        _reactBootstrap.Modal.Body,
 	        null,
-	        _react2.default.createElement(_Auth2.default, null)
+	        _react2.default.createElement(_Auth2.default, { getUser: props.getUser })
 	      ),
 	      _react2.default.createElement(
 	        _reactBootstrap.Modal.Footer,
@@ -42336,8 +42349,9 @@
 
 	      var galleries = [];
 
-	      return _firebase2.default.database().ref('/galleries').once('value').then(function (snapshot) {
+	      return _firebase2.default.database().ref('users/' + this.props.userId + '/galleries').once('value').then(function (snapshot) {
 	        var data = snapshot.val();
+
 	        for (var gallery in data) {
 	          data[gallery].id = gallery;
 	          galleries.push(data[gallery]);
@@ -42357,7 +42371,7 @@
 	        'div',
 	        null,
 	        galleries,
-	        _react2.default.createElement(_AddGallery2.default, null)
+	        _react2.default.createElement(_AddGallery2.default, { userId: this.props.userId })
 	      );
 	    }
 	  }]);
@@ -42407,7 +42421,8 @@
 
 	    _this.state = {
 	      galleryName: '',
-	      galleryDesc: ''
+	      galleryDesc: '',
+	      galleryKey: ''
 	    };
 
 	    _this.onInputChange = _this.onInputChange.bind(_this);
@@ -42425,12 +42440,22 @@
 	  }, {
 	    key: 'addGallery',
 	    value: function addGallery() {
+	      var _this2 = this;
+
 	      var newGalleryRef = _firebase2.default.database().ref('galleries/').push();
+	      this.setState({ galleryKey: newGalleryRef.key });
 	      newGalleryRef.set({
 	        name: this.state.galleryName,
 	        desc: this.state.galleryDesc
 	      }).then(function () {
-	        return console.log('success');
+	        return _firebase2.default.database().ref('users/' + _this2.props.userId).once('value');
+	      }).then(function (snapshot) {
+	        var user = snapshot.val();
+	        var galleries = snapshot.val().galleries || [];
+	        galleries.push(_this2.state.galleryKey);
+	        return galleries;
+	      }).then(function (galleries) {
+	        _firebase2.default.database().ref('users/' + _this2.props.userId).set({ galleries: galleries });
 	      }).catch(function (err) {
 	        return console.error(err);
 	      });
@@ -42438,7 +42463,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      var content = void 0;
 	      if (this.state.adding) {
@@ -42469,7 +42494,7 @@
 	                _reactBootstrap.Col,
 	                { sm: 10 },
 	                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Name', id: 'galleryName', onChange: function onChange(e) {
-	                    return _this2.onInputChange(e.target.value, e.target.id);
+	                    return _this3.onInputChange(e.target.value, e.target.id);
 	                  } })
 	              )
 	            ),
@@ -42485,7 +42510,7 @@
 	                _reactBootstrap.Col,
 	                { sm: 10 },
 	                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Description', id: 'galleryDesc', onChange: function onChange(e) {
-	                    return _this2.onInputChange(e.target.value, e.target.id);
+	                    return _this3.onInputChange(e.target.value, e.target.id);
 	                  } })
 	              )
 	            ),
@@ -42508,7 +42533,7 @@
 	        content = _react2.default.createElement(
 	          _reactBootstrap.Button,
 	          { onClick: function onClick() {
-	              return _this2.setState({ adding: true });
+	              return _this3.setState({ adding: true });
 	            }, bsStyle: 'primary' },
 	          'Add Gallery'
 	        );

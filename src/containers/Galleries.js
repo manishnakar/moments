@@ -20,8 +20,9 @@ class Galleries extends Component {
   getGalleries() {
     let galleries = [];
 
-    return firebase.database().ref('/galleries').once('value').then((snapshot) => {
+    return firebase.database().ref(`users/${this.props.userId}/galleries`).once('value').then((snapshot) => {
       let data = snapshot.val();
+
       for (let gallery in data) {
         data[gallery].id = gallery;
         galleries.push(data[gallery]);
@@ -41,7 +42,7 @@ class Galleries extends Component {
     return (
       <div>
         {galleries}
-        <AddGallery />
+        <AddGallery userId={this.props.userId}/>
       </div>
     );
   }

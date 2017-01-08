@@ -13,7 +13,7 @@ function AuthModal(props) {
           </Modal.Header>
 
       <Modal.Body>
-        <Auth />
+        <Auth getUser={props.getUser}/>
       </Modal.Body>
 
       <Modal.Footer>

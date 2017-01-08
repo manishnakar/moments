@@ -27,10 +27,12 @@ class App extends Component {
     this.state = {
       galleries: [],
       signingIn: false,
+      user: null,
     };
 
     this.signIn = this.signIn.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.getUser = this.getUser.bind(this);
   }
 
   closeModal() {
@@ -41,11 +43,15 @@ class App extends Component {
     this.setState({signingIn: true});
   }
 
+  getUser(user) {
+    this.setState({user});
+  }
+
   render() {
 
     let signingIn = false;
     if (this.state.signingIn) {
-      signingIn = <AuthModal closeModal={this.closeModal}/>;
+      signingIn = <AuthModal closeModal={this.closeModal} getUser={this.getUser}/>;
     }
 
     return (
@@ -53,7 +59,7 @@ class App extends Component {
         <NavBar signIn={this.signIn}/>
         <PageHeader>Moments</PageHeader>
         {signingIn}
-        <Galleries />
+        <Galleries userId={this.state.user}/>
         <Upload />
       </div>
     );

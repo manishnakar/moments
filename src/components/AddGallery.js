@@ -11,6 +11,7 @@ class AddGallery extends Component {
     this.state = {
       galleryName: '',
       galleryDesc: '',
+      galleryKey: '',
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -25,11 +26,21 @@ class AddGallery extends Component {
 
   addGallery() {
     let newGalleryRef = firebase.database().ref('galleries/').push();
+    this.setState({galleryKey: newGalleryRef.key});
     newGalleryRef.set({
       name: this.state.galleryName,
       desc: this.state.galleryDesc,
     })
-    .then(() => console.log('success'))
+    .then(() => firebase.database().ref(`users/${this.props.userId}`).once('value'))
+    .then((snapshot) => {
+      let user = snapshot.val();
+      let galleries = snapshot.val().galleries || [];
+      galleries.push(this.state.galleryKey);
+      return galleries;
+    })
+    .then(galleries => {
+      firebase.database().ref(`users/${this.props.userId}`).set({galleries});
+    })
     .catch((err) => console.error(err));
   }
 
