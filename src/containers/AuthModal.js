@@ -18,7 +18,6 @@ function AuthModal(props) {
 
       <Modal.Footer>
         <Button onClick={props.closeModal}>Close</Button>
-        <Button bsStyle="primary">Save changes</Button>
       </Modal.Footer>
 
     </Modal.Dialog>

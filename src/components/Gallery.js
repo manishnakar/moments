@@ -9,9 +9,6 @@ class Gallery extends Component {
   }
 
   render() {
-
-    console.log(this.props.images);
-
     let images = this.props.images.map((image, i) => {
       return (
         <Image key={i} src={image.src} />

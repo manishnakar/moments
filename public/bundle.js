@@ -22517,9 +22517,6 @@
 	  _createClass(Gallery, [{
 	    key: 'render',
 	    value: function render() {
-
-	      console.log(this.props.images);
-
 	      var images = this.props.images.map(function (image, i) {
 	        return _react2.default.createElement(_Image2.default, { key: i, src: image.src });
 	      });
@@ -42243,11 +42240,6 @@
 	          _reactBootstrap.Button,
 	          { onClick: props.closeModal },
 	          'Close'
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Button,
-	          { bsStyle: 'primary' },
-	          'Save changes'
 	        )
 	      )
 	    )

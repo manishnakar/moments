@@ -1,11 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
 @import "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
 
-
-ul {
-
-}
-
 #app {
   text-align: center;
 }
@@ -14,5 +9,12 @@ ul {
   margin: 0 auto;
 }
 
+#upload {
+  width: 80%;
+}
+
 @media screen and (min-width: 560px) {
+  #upload {
+    width 50%;
+  }
 }
