@@ -4,12 +4,11 @@ import React, {Component} from 'react';
 import firebase from 'firebase';
 
 import Image from './Image';
+import Upload from './Upload';
 
 class Gallery extends Component {
   constructor(props, context) {
     super(props, context);
-
-    this.getPhotos();
 
     this.state = {
       images: [],
@@ -17,33 +16,25 @@ class Gallery extends Component {
   }
 
   getPhotos() {
-    let images = null;
-    //
-    // this.props.images.map((image) => {
-    //   console.log(image);
-    //   // use the image IDs coming in on the gallery to look them up one by one in firebase and then add them to an array.
-    // });
-
-    // 
-    // this.setState({images});
+    firebase.database().ref(`galleries/${this.props.gallery}`).once('value')
+    .then((snapshot) => this.setState({images: snapshot.val().images}))
+    .catch(console.error);
   }
 
-
   render() {
-    let images = null;
-
-    if (this.state.images) {
-      images = this.state.images;
-      for (let image in images) {
-        // console.log(image, 'should be image key');
-        return <Image key={image}/>;
-      }
-    }
+    let images = this.state.images.map(image => {
+      return (
+        <div>
+          <Image image={image} />
+        </div>
+      );
+    });
 
     return (
       <div>
         <ul>
           {images}
+          <Upload />
         </ul>
       </div>
     );

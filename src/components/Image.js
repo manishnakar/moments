@@ -7,7 +7,7 @@ const image = {};
 class Image extends Component {
   render() {
     return (
-      <img src={this.props.src}></img>
+      <img src={this.props.image.src}></img>
     );
   }
 }

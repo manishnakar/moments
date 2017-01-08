@@ -6,7 +6,6 @@ import { PageHeader } from 'react-bootstrap';
 import firebase from 'firebase';
 
 import Galleries from '../containers/Galleries';
-import Upload from './Upload';
 import NavBar from './NavBar';
 import AuthModal from '../containers/AuthModal';
 
@@ -57,18 +56,25 @@ class App extends Component {
 
 
   render() {
-    let signingIn = false;
+    let inProcessOfSigningIn = false;
+    let signedIn = false;
+
     if (this.state.signingIn) {
-      signingIn = <AuthModal closeModal={this.closeModal} getUser={this.getUser} />;
+      inProcessOfSigningIn = <AuthModal closeModal={this.closeModal} getUser={this.getUser} />;
+    }
+
+    if (this.state.user) {
+      signedIn = (
+        <Galleries userId={this.state.user} galleries={this.state.galleries}/>
+      );
     }
 
     return (
       <div>
         <NavBar signIn={this.signIn}/>
         <PageHeader>Moments</PageHeader>
-        {signingIn}
-        <Galleries userId={this.state.user}/>
-        <Upload />
+        {inProcessOfSigningIn}
+        {signedIn}
       </div>
     );
   }
