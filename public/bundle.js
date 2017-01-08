@@ -42435,6 +42435,10 @@
 	      newGalleryRef.set({
 	        name: this.state.galleryName,
 	        desc: this.state.galleryDesc
+	      }).then(function () {
+	        return console.log('success');
+	      }).catch(function (err) {
+	        return console.error(err);
 	      });
 	    }
 	  }, {

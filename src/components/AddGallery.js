@@ -28,7 +28,9 @@ class AddGallery extends Component {
     newGalleryRef.set({
       name: this.state.galleryName,
       desc: this.state.galleryDesc,
-    });
+    })
+    .then(() => console.log('success'))
+    .catch((err) => console.error(err));
   }
 
   render() {
