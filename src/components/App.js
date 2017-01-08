@@ -33,6 +33,7 @@ class App extends Component {
     this.signIn = this.signIn.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.getUser = this.getUser.bind(this);
+    this.getGalleries = this.getGalleries.bind(this);
   }
 
   closeModal() {
@@ -44,14 +45,25 @@ class App extends Component {
   }
 
   getUser(user) {
+    console.log('getting user');
     this.setState({user});
+    this.getGalleries();
   }
+
+  getGalleries() {
+    firebase.database().ref(`users/${this.state.user}`).once('value')
+    .then((snapshot) => {
+      console.log(snapshot.val())
+      this.setState({galleries: snapshot.val().galleries})
+    });
+  }
+
 
   render() {
 
     let signingIn = false;
     if (this.state.signingIn) {
-      signingIn = <AuthModal closeModal={this.closeModal} getUser={this.getUser}/>;
+      signingIn = <AuthModal closeModal={this.closeModal} getUser={this.getUser} />;
     }
 
     return (

@@ -22,7 +22,6 @@ class Auth extends Component {
   signUp() {
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
     .then((user) => {
-      console.log(user);
       firebase.database().ref(`users/${user.uid}`).set({
         email: this.state.email,
       });
@@ -36,8 +35,9 @@ class Auth extends Component {
 
   logIn() {
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-    .then(() => {
+    .then((user) => {
       this.setState({success: 'Successfully Logged In!'});
+      this.props.getUser(user.uid);
     })
     .catch((error) => {
       this.setState({error: error.message});

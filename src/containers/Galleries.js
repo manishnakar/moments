@@ -14,21 +14,6 @@ class Galleries extends Component {
       galleries: [],
     };
 
-    this.getGalleries();
-  }
-
-  getGalleries() {
-    let galleries = [];
-
-    return firebase.database().ref(`users/${this.props.userId}/galleries`).once('value').then((snapshot) => {
-      let data = snapshot.val();
-
-      for (let gallery in data) {
-        data[gallery].id = gallery;
-        galleries.push(data[gallery]);
-      }
-      this.setState({galleries});
-    });
   }
 
   render() {
