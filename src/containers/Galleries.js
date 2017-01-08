@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 
-import Gallery from '../components/Gallery';
-import AddGallery from '../components/AddGallery';
+import Gallery from '../components/gallery';
+import AddGallery from '../components/add-gallery';
 
 class Galleries extends Component {
   constructor(props) {

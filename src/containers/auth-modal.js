@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import Auth from '../components/Auth';
+import Auth from '../components/auth';
 
 function AuthModal(props) {
   return (

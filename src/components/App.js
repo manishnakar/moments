@@ -5,9 +5,9 @@ import ReactDOM from 'react-dom';
 import { PageHeader } from 'react-bootstrap';
 import firebase from 'firebase';
 
-import Galleries from '../containers/Galleries';
-import NavBar from './NavBar';
-import AuthModal from '../containers/AuthModal';
+import Galleries from '../containers/galleries';
+import NavBar from './nav-bar';
+import AuthModal from '../containers/auth-modal';
 
 let localConfig = process.env.API_KEY ? {
   apiKey: process.env.API_KEY,

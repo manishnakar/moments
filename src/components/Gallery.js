@@ -3,8 +3,8 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
 
-import Image from './Image';
-import Upload from './Upload';
+import Image from './image';
+import Upload from './upload';
 
 class Gallery extends Component {
   constructor(props, context) {
