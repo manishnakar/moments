@@ -22,14 +22,16 @@ class Galleries extends Component {
   }
 
   render() {
-    // galleries is currently an array of string IDs
+
     let galleries = this.props.galleries.map(gallery => {
       return <GalleryThumbnail key={gallery} gallery={gallery}/>;
     });
 
     return (
-      <div>
-        {galleries}
+      <div id="galleries">  
+        <div id="galleries-container">
+          {galleries}
+        </div>
         <AddGallery userId={this.props.userId} updateGalleries={this.updateGalleries}/>
       </div>
     );

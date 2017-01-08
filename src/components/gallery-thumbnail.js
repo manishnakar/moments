@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import firebase from 'firebase';
+import { Thumbnail } from 'react-bootstrap';
 
 class GalleryThumbnail extends Component {
   constructor(props) {
@@ -20,10 +21,10 @@ class GalleryThumbnail extends Component {
 
   render() {
     return (
-      <div>
-        <h1>{this.state.gallery.name}</h1>
-        <h1>{this.state.gallery.desc}</h1>
-      </div>
+      <Thumbnail id="gallery-thumbnail">
+        <p>{this.state.gallery.name}</p>
+        <p>{this.state.gallery.desc}</p>
+      </Thumbnail>
     );
   }
 }

@@ -13,8 +13,28 @@
   width: 80%;
 }
 
+#galleries-container {
+  padding: 2%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-between;
+  align-items: center;
+}
+
+#gallery-thumbnail {
+  display: inline-block;
+  flex-basis: 40%;
+  margin: 2%;
+}
+
 @media screen and (min-width: 560px) {
   #upload {
     width 50%;
+  }
+
+  #gallery-thumbnail {
+    flex-basis: 15%;
   }
 }
