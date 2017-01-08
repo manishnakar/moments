@@ -41698,6 +41698,10 @@
 
 	var _reactBootstrap = __webpack_require__(194);
 
+	var _firebase = __webpack_require__(183);
+
+	var _firebase2 = _interopRequireDefault(_firebase);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41712,10 +41716,22 @@
 	  function NavBar(props) {
 	    _classCallCheck(this, NavBar);
 
-	    return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
+
+	    _this.signOut = _this.signOut.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(NavBar, [{
+	    key: 'signOut',
+	    value: function signOut() {
+	      _firebase2.default.auth().signOut().then(function () {
+	        return console.log('logged out');
+	      }).catch(function (err) {
+	        return console.log(err);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -41781,7 +41797,7 @@
 	            ),
 	            _react2.default.createElement(
 	              _reactBootstrap.NavItem,
-	              { eventKey: 2, href: '#' },
+	              { eventKey: 2, href: '#', onClick: this.signOut },
 	              'Log Out'
 	            )
 	          )
