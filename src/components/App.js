@@ -45,22 +45,18 @@ class App extends Component {
   }
 
   getUser(user) {
-    console.log('getting user');
     this.setState({user});
     this.getGalleries();
   }
 
   getGalleries() {
     firebase.database().ref(`users/${this.state.user}`).once('value')
-    .then((snapshot) => {
-      console.log(snapshot.val())
-      this.setState({galleries: snapshot.val().galleries})
-    });
+    .then((snapshot) => this.setState({galleries: snapshot.val().galleries}))
+    .catch(console.error);
   }
 
 
   render() {
-
     let signingIn = false;
     if (this.state.signingIn) {
       signingIn = <AuthModal closeModal={this.closeModal} getUser={this.getUser} />;
