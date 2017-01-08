@@ -31,6 +31,7 @@ class Galleries extends Component {
 
     return (
       <div>
+        <h1>Sup</h1>
         {galleries}
         <AddGallery userId={this.props.userId} updateGalleries={this.updateGalleries}/>
       </div>

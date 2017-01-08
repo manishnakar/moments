@@ -24,13 +24,13 @@ class App extends Component {
     super(props);
 
     this.state = {
-      galleries: [],
+      galleries: null,
       signingIn: false,
       user: null,
     };
 
-    this.signIn = this.signIn.bind(this);
-    this.signOut = this.signOut.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.getGalleries = this.getGalleries.bind(this);
     this.authListener = this.authListener.bind(this);
@@ -44,6 +44,7 @@ class App extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({user: user.uid});
+        this.getGalleries();
       } else {
         //browserHistory.push('/signin');
       }
@@ -60,7 +61,7 @@ class App extends Component {
 
   handleSignOut() {
     firebase.auth().signOut()
-    .then(() => this.setState({user: null}))
+    .then(() => this.setState({user: null, galleries: null}))
     .catch(err => console.log(err));
   }
 
@@ -85,7 +86,7 @@ class App extends Component {
       inProcessOfSigningIn = <AuthModal closeModal={this.closeModal} />;
     }
 
-    if (this.state.user) {
+    if (this.state.galleries) {
       signedIn = (
         <Galleries userId={this.state.user} galleries={this.state.galleries}/>
       );
