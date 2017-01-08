@@ -22520,7 +22520,7 @@
 	    _this.getPhotos();
 
 	    _this.state = {
-	      photos: []
+	      images: []
 	    };
 	    return _this;
 	  }
@@ -22530,7 +22530,7 @@
 	    value: function getPhotos() {
 	      var _this2 = this;
 
-	      var images = [];
+	      var images = null;
 
 	      return _firebase2.default.database().ref('/galleries/' + this.props.galleryId).once('value').then(function (snapshot) {
 	        var data = snapshot.val();
@@ -22545,9 +22545,15 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var images = this.props.images.map(function (image, i) {
-	        return _react2.default.createElement(_Image2.default, { key: i, src: image.src });
-	      });
+	      var images = null;
+
+	      if (this.state.images) {
+	        images = this.state.images;
+	        for (var image in images) {
+	          // console.log(image, 'should be image key');
+	          return _react2.default.createElement(_Image2.default, { key: image });
+	        }
+	      }
 
 	      return _react2.default.createElement(
 	        'div',
@@ -22825,7 +22831,8 @@
 	    value: function render() {
 
 	      var galleries = this.state.galleries.map(function (gallery, i) {
-	        return _react2.default.createElement(_Gallery2.default, { key: i, gallery: gallery });
+	        console.log(gallery);
+	        return _react2.default.createElement(_Gallery2.default, { key: i, galleryId: i, gallery: gallery });
 	      });
 
 	      var signingIn = false;

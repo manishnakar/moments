@@ -58,8 +58,9 @@ class App extends Component {
   render() {
 
     let galleries = this.state.galleries.map((gallery, i) => {
+      console.log(gallery);
       return (
-        <Gallery key={i} gallery={gallery} />
+        <Gallery key={i} galleryId={i} gallery={gallery} />
       );
     });
 

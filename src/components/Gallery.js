@@ -12,12 +12,12 @@ class Gallery extends Component {
     this.getPhotos();
 
     this.state = {
-      photos: [],
+      images: [],
     };
   }
 
   getPhotos() {
-    let images = [];
+    let images = null;
 
     return firebase.database().ref(`/galleries/${this.props.galleryId}`).once('value').then((snapshot) => {
       let data = snapshot.val();
@@ -32,11 +32,15 @@ class Gallery extends Component {
 
 
   render() {
-    let images = this.props.images.map((image, i) => {
-      return (
-        <Image key={i} src={image.src} />
-      );
-    });
+    let images = null;
+
+    if (this.state.images) {
+      images = this.state.images;
+      for (let image in images) {
+        // console.log(image, 'should be image key');
+        return <Image key={image}/>;
+      }
+    }
 
     return (
       <div>
