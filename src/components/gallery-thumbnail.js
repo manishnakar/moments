@@ -14,12 +14,17 @@ class GalleryThumbnail extends Component {
 
   componentDidMount() {
     firebase.database().ref(`galleries/${this.props.gallery}`).once('value')
-    .then((snapshot) => this.setState({gallery: snapshot.val()}))
+    .then(snapshot => this.setState({gallery: snapshot.val()}))
     .catch(console.error);
   }
 
   render() {
-    console.log(this.state)
+    return (
+      <div>
+        <h1>{this.state.gallery.name}</h1>
+        <h1>{this.state.gallery.desc}</h1>
+      </div>
+    );
   }
 }
 

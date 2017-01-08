@@ -40,6 +40,12 @@ class App extends Component {
     this.authListener();
   }
 
+  componentDidMount() {
+    if (this.state.user) {
+      this.getGalleries();
+    }
+  }
+
   authListener() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -86,7 +92,7 @@ class App extends Component {
       inProcessOfSigningIn = <AuthModal closeModal={this.closeModal} />;
     }
 
-    if (this.state.galleries) {
+    if (this.state.user && this.state.galleries) {
       signedIn = (
         <Galleries userId={this.state.user} galleries={this.state.galleries}/>
       );

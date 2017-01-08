@@ -15,7 +15,6 @@ class Galleries extends Component {
     };
 
     this.updateGalleries = this.updateGalleries.bind(this);
-    this.setState({galleries: this.props.galleries});
   }
 
   updateGalleries(galleries) {
@@ -24,14 +23,12 @@ class Galleries extends Component {
 
   render() {
     // galleries is currently an array of string IDs
-    let galleries = this.state.galleries.map(gallery => {
-      console.log(gallery);
+    let galleries = this.props.galleries.map(gallery => {
       return <GalleryThumbnail key={gallery} gallery={gallery}/>;
     });
 
     return (
       <div>
-        <h1>Sup</h1>
         {galleries}
         <AddGallery userId={this.props.userId} updateGalleries={this.updateGalleries}/>
       </div>
