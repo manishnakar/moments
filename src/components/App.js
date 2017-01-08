@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { PageHeader } from 'react-bootstrap';
 import firebase from 'firebase';
 
-import Gallery from './Gallery';
+import Galleries from '../containers/Galleries';
 import Upload from './Upload';
 import NavBar from './NavBar';
 import AuthModal from '../containers/AuthModal';
@@ -29,22 +29,8 @@ class App extends Component {
       signingIn: false,
     };
 
-    this.getGalleries();
     this.signIn = this.signIn.bind(this);
     this.closeModal = this.closeModal.bind(this);
-  }
-
-  getGalleries() {
-    let galleries = [];
-
-    return firebase.database().ref('/galleries').once('value').then((snapshot) => {
-      let data = snapshot.val();
-      for (let gallery in data) {
-        galleries.push(data[gallery]);
-      }
-
-      this.setState({galleries});
-    });
   }
 
   closeModal() {
@@ -57,13 +43,6 @@ class App extends Component {
 
   render() {
 
-    let galleries = this.state.galleries.map((gallery, i) => {
-      console.log(gallery);
-      return (
-        <Gallery key={i} galleryId={i} gallery={gallery} />
-      );
-    });
-
     let signingIn = false;
     if (this.state.signingIn) {
       signingIn = <AuthModal closeModal={this.closeModal}/>;
@@ -74,7 +53,7 @@ class App extends Component {
         <NavBar signIn={this.signIn}/>
         <PageHeader>Moments</PageHeader>
         {signingIn}
-        {galleries}
+        <Galleries />
         <Upload />
       </div>
     );

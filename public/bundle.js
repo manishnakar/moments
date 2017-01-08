@@ -22747,9 +22747,9 @@
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
-	var _Gallery = __webpack_require__(190);
+	var _Galleries = __webpack_require__(450);
 
-	var _Gallery2 = _interopRequireDefault(_Gallery);
+	var _Galleries2 = _interopRequireDefault(_Galleries);
 
 	var _Upload = __webpack_require__(192);
 
@@ -22794,29 +22794,12 @@
 	      signingIn: false
 	    };
 
-	    _this.getGalleries();
 	    _this.signIn = _this.signIn.bind(_this);
 	    _this.closeModal = _this.closeModal.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(App, [{
-	    key: 'getGalleries',
-	    value: function getGalleries() {
-	      var _this2 = this;
-
-	      var galleries = [];
-
-	      return _firebase2.default.database().ref('/galleries').once('value').then(function (snapshot) {
-	        var data = snapshot.val();
-	        for (var gallery in data) {
-	          galleries.push(data[gallery]);
-	        }
-
-	        _this2.setState({ galleries: galleries });
-	      });
-	    }
-	  }, {
 	    key: 'closeModal',
 	    value: function closeModal() {
 	      this.setState({ signingIn: false });
@@ -22829,11 +22812,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-
-	      var galleries = this.state.galleries.map(function (gallery, i) {
-	        console.log(gallery);
-	        return _react2.default.createElement(_Gallery2.default, { key: i, galleryId: i, gallery: gallery });
-	      });
 
 	      var signingIn = false;
 	      if (this.state.signingIn) {
@@ -22850,7 +22828,7 @@
 	          'Moments'
 	        ),
 	        signingIn,
-	        galleries,
+	        _react2.default.createElement(_Galleries2.default, null),
 	        _react2.default.createElement(_Upload2.default, null)
 	      );
 	    }
@@ -42303,6 +42281,253 @@
 	}
 
 	exports.default = AuthModal;
+
+/***/ },
+/* 450 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _firebase = __webpack_require__(183);
+
+	var _firebase2 = _interopRequireDefault(_firebase);
+
+	var _Gallery = __webpack_require__(190);
+
+	var _Gallery2 = _interopRequireDefault(_Gallery);
+
+	var _AddGallery = __webpack_require__(451);
+
+	var _AddGallery2 = _interopRequireDefault(_AddGallery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Galleries = function (_Component) {
+	  _inherits(Galleries, _Component);
+
+	  function Galleries(props) {
+	    _classCallCheck(this, Galleries);
+
+	    var _this = _possibleConstructorReturn(this, (Galleries.__proto__ || Object.getPrototypeOf(Galleries)).call(this, props));
+
+	    _this.state = {
+	      galleries: []
+	    };
+
+	    _this.getGalleries();
+	    return _this;
+	  }
+
+	  _createClass(Galleries, [{
+	    key: 'getGalleries',
+	    value: function getGalleries() {
+	      var _this2 = this;
+
+	      var galleries = [];
+
+	      return _firebase2.default.database().ref('/galleries').once('value').then(function (snapshot) {
+	        var data = snapshot.val();
+	        for (var gallery in data) {
+	          galleries.push(data[gallery]);
+	        }
+
+	        _this2.setState({ galleries: galleries });
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+
+	      var galleries = this.state.galleries.map(function (gallery, i) {
+	        console.log(gallery);
+	        return _react2.default.createElement(_Gallery2.default, { key: i, galleryId: i, gallery: gallery });
+	      });
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        galleries,
+	        _react2.default.createElement(_AddGallery2.default, null)
+	      );
+	    }
+	  }]);
+
+	  return Galleries;
+	}(_react.Component);
+
+	exports.default = Galleries;
+
+/***/ },
+/* 451 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _firebase = __webpack_require__(183);
+
+	var _firebase2 = _interopRequireDefault(_firebase);
+
+	var _reactBootstrap = __webpack_require__(194);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AddGallery = function (_Component) {
+	  _inherits(AddGallery, _Component);
+
+	  function AddGallery(props) {
+	    _classCallCheck(this, AddGallery);
+
+	    var _this = _possibleConstructorReturn(this, (AddGallery.__proto__ || Object.getPrototypeOf(AddGallery)).call(this, props));
+
+	    _this.state = {
+	      galleryName: '',
+	      galleryDesc: ''
+	    };
+
+	    _this.onInputChange = _this.onInputChange.bind(_this);
+	    _this.addGallery = _this.addGallery.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(AddGallery, [{
+	    key: 'onInputChange',
+	    value: function onInputChange(value, field) {
+	      var state = {};
+	      state[field] = value;
+	      this.setState(state);
+	    }
+	  }, {
+	    key: 'addGallery',
+	    value: function addGallery() {
+	      var newGalleryRef = _firebase2.default.database().ref('galleries/').push();
+	      newGalleryRef.set({
+	        name: this.state.galleryName,
+	        desc: this.state.galleryDesc
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var content = void 0;
+	      if (this.state.adding) {
+	        content = _react2.default.createElement(
+	          'div',
+	          { id: 'addGallery' },
+	          _react2.default.createElement(
+	            _reactBootstrap.PageHeader,
+	            null,
+	            _react2.default.createElement(
+	              'small',
+	              null,
+	              'Add a Gallery'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Form,
+	            { horizontal: true },
+	            _react2.default.createElement(
+	              _reactBootstrap.FormGroup,
+	              null,
+	              _react2.default.createElement(
+	                _reactBootstrap.Col,
+	                { componentClass: _reactBootstrap.ControlLabel, sm: 2 },
+	                'Name:'
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.Col,
+	                { sm: 10 },
+	                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Name', id: 'galleryName', onChange: function onChange(e) {
+	                    return _this2.onInputChange(e.target.value, e.target.id);
+	                  } })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.FormGroup,
+	              null,
+	              _react2.default.createElement(
+	                _reactBootstrap.Col,
+	                { componentClass: _reactBootstrap.ControlLabel, sm: 2 },
+	                'Description:'
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.Col,
+	                { sm: 10 },
+	                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Description', id: 'galleryDesc', onChange: function onChange(e) {
+	                    return _this2.onInputChange(e.target.value, e.target.id);
+	                  } })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.FormGroup,
+	              null,
+	              _react2.default.createElement(
+	                _reactBootstrap.Col,
+	                { smOffset: 2, sm: 10 },
+	                _react2.default.createElement(
+	                  _reactBootstrap.Button,
+	                  { onClick: this.addGallery, bsStyle: 'primary' },
+	                  'Add Gallery'
+	                )
+	              )
+	            )
+	          )
+	        );
+	      } else {
+	        content = _react2.default.createElement(
+	          _reactBootstrap.Button,
+	          { onClick: function onClick() {
+	              return _this2.setState({ adding: true });
+	            }, bsStyle: 'primary' },
+	          'Add Gallery'
+	        );
+	      }
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        content
+	      );
+	    }
+	  }]);
+
+	  return AddGallery;
+	}(_react.Component);
+
+	exports.default = AddGallery;
 
 /***/ }
 /******/ ]);
