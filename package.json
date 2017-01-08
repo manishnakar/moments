@@ -7,7 +7,7 @@
     "build": "webpack -w",
     "start": "node server.js",
     "watch": "webpack-dev-server",
-    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha ./test/lib/test-setup.js test/**/*-test.js",
+    "test": "istanbul cover --dir ./coverage _mocha --require ./test/lib/test-setup.js --bail --recursive './test/**/*-test.js' --opts",
     "start-debug": "DEBUG='moments*' npm start",
     "lint": "./node_modules/eslint/bin/eslint.js .",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
