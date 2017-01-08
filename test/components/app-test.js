@@ -8,11 +8,11 @@ import App from '../../src/components/App';
 describe('<App />', function(){
   const wrapper = shallow(<App />);
 
-  it('should render a Galleres Container', () => {
-    expect(wrapper.find('Galleries')).to.have.length(1);
+  it('should render a nav bar', () => {
+    expect(wrapper.find('NavBar')).to.have.length(1);
   });
 
-  it('should render an Upload form', () => {
-    expect(wrapper.find('Upload')).to.have.length(1);
+  it('should render a page header', () => {
+    expect(wrapper.find('PageHeader')).to.have.length(1);
   });
 });
