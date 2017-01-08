@@ -22493,6 +22493,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _firebase = __webpack_require__(183);
+
+	var _firebase2 = _interopRequireDefault(_firebase);
+
 	var _Image = __webpack_require__(191);
 
 	var _Image2 = _interopRequireDefault(_Image);
@@ -22511,10 +22515,34 @@
 	  function Gallery(props, context) {
 	    _classCallCheck(this, Gallery);
 
-	    return _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).call(this, props, context));
+	    var _this = _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).call(this, props, context));
+
+	    _this.getPhotos();
+
+	    _this.state = {
+	      photos: []
+	    };
+	    return _this;
 	  }
 
 	  _createClass(Gallery, [{
+	    key: 'getPhotos',
+	    value: function getPhotos() {
+	      var _this2 = this;
+
+	      var images = [];
+
+	      return _firebase2.default.database().ref('/galleries/' + this.props.galleryId).once('value').then(function (snapshot) {
+	        var data = snapshot.val();
+	        console.log(data);
+	        for (var image in data.images) {
+	          images.push(data[image]);
+	        }
+
+	        _this2.setState({ images: images });
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var images = this.props.images.map(function (image, i) {
@@ -22756,30 +22784,30 @@
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 	    _this.state = {
-	      images: [],
+	      galleries: [],
 	      signingIn: false
 	    };
 
-	    _this.getPhotos();
+	    _this.getGalleries();
 	    _this.signIn = _this.signIn.bind(_this);
 	    _this.closeModal = _this.closeModal.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(App, [{
-	    key: 'getPhotos',
-	    value: function getPhotos() {
+	    key: 'getGalleries',
+	    value: function getGalleries() {
 	      var _this2 = this;
 
-	      var images = [];
+	      var galleries = [];
 
-	      return _firebase2.default.database().ref('/images').once('value').then(function (snapshot) {
+	      return _firebase2.default.database().ref('/galleries').once('value').then(function (snapshot) {
 	        var data = snapshot.val();
-	        for (var image in data) {
-	          images.push(data[image]);
+	        for (var gallery in data) {
+	          galleries.push(data[gallery]);
 	        }
 
-	        _this2.setState({ images: images });
+	        _this2.setState({ galleries: galleries });
 	      });
 	    }
 	  }, {
@@ -22795,6 +22823,11 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+
+	      var galleries = this.state.galleries.map(function (gallery, i) {
+	        return _react2.default.createElement(_Gallery2.default, { key: i, gallery: gallery });
+	      });
+
 	      var signingIn = false;
 	      if (this.state.signingIn) {
 	        signingIn = _react2.default.createElement(_AuthModal2.default, { closeModal: this.closeModal });
@@ -22810,7 +22843,7 @@
 	          'Moments'
 	        ),
 	        signingIn,
-	        _react2.default.createElement(_Gallery2.default, { images: this.state.images }),
+	        galleries,
 	        _react2.default.createElement(_Upload2.default, null)
 	      );
 	    }

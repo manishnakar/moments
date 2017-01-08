@@ -25,25 +25,25 @@ class App extends Component {
     super(props);
 
     this.state = {
-      images: [],
+      galleries: [],
       signingIn: false,
     };
 
-    this.getPhotos();
+    this.getGalleries();
     this.signIn = this.signIn.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
-  getPhotos() {
-    let images = [];
+  getGalleries() {
+    let galleries = [];
 
-    return firebase.database().ref('/images').once('value').then((snapshot) => {
+    return firebase.database().ref('/galleries').once('value').then((snapshot) => {
       let data = snapshot.val();
-      for (let image in data) {
-        images.push(data[image]);
+      for (let gallery in data) {
+        galleries.push(data[gallery]);
       }
 
-      this.setState({images});
+      this.setState({galleries});
     });
   }
 
@@ -56,6 +56,13 @@ class App extends Component {
   }
 
   render() {
+
+    let galleries = this.state.galleries.map((gallery, i) => {
+      return (
+        <Gallery key={i} gallery={gallery} />
+      );
+    });
+
     let signingIn = false;
     if (this.state.signingIn) {
       signingIn = <AuthModal closeModal={this.closeModal}/>;
@@ -66,7 +73,7 @@ class App extends Component {
         <NavBar signIn={this.signIn}/>
         <PageHeader>Moments</PageHeader>
         {signingIn}
-        <Gallery images={this.state.images} />
+        {galleries}
         <Upload />
       </div>
     );
