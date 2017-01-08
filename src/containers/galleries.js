@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 
-import Gallery from '../components/gallery';
 import AddGallery from '../components/add-gallery';
+import GalleryThumbnail from '../components/gallery-thumbnail';
 
 class Galleries extends Component {
   constructor(props) {
@@ -26,13 +26,7 @@ class Galleries extends Component {
     // galleries is currently an array of string IDs
     let galleries = this.state.galleries.map(gallery => {
       console.log(gallery);
-      return (
-        <div>
-          <h1>Name: {gallery.name}</h1>
-          <h1>Description: {gallery.desc}</h1>
-        </div>
-        // <Gallery key={gallery} gallery={gallery} />
-      );
+      return <GalleryThumbnail key={gallery} gallery={gallery}/>;
     });
 
     return (

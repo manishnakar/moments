@@ -21,27 +21,19 @@ class Auth extends Component {
 
   signUp() {
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-    .then((user) => {
+    .then(user => {
       firebase.database().ref(`users/${user.uid}`).set({
         email: this.state.email,
       });
       this.setState({success: 'Successfully Signed Up!'});
-      this.props.getUser(user.uid);
     })
-    .catch((error) => {
-      this.setState({error: error.message});
-    });
+    .catch(error => this.setState({error: error.message}));
   }
 
   logIn() {
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-    .then((user) => {
-      this.setState({success: 'Successfully Logged In!'});
-      this.props.getUser(user.uid);
-    })
-    .catch((error) => {
-      this.setState({error: error.message});
-    });
+    .then(user => this.setState({success: 'Successfully Logged In!'}))
+    .catch(error => this.setState({error: error.message}));
   }
 
   onInputChange(value, field) {

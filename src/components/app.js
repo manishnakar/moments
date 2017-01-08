@@ -30,22 +30,38 @@ class App extends Component {
     };
 
     this.signIn = this.signIn.bind(this);
+    this.signOut = this.signOut.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.getUser = this.getUser.bind(this);
     this.getGalleries = this.getGalleries.bind(this);
+    this.authListener = this.authListener.bind(this);
+  }
+
+  componentWillMount() {
+    this.authListener();
+  }
+
+  authListener() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({user: user.uid});
+      } else {
+        //browserHistory.push('/signin');
+      }
+    });
   }
 
   closeModal() {
     this.setState({signingIn: false});
   }
 
-  signIn() {
+  handleSignIn() {
     this.setState({signingIn: true});
   }
 
-  getUser(user) {
-    this.setState({user});
-    this.getGalleries();
+  handleSignOut() {
+    firebase.auth().signOut()
+    .then(() => this.setState({user: null}))
+    .catch(err => console.log(err));
   }
 
   getGalleries() {
@@ -66,7 +82,7 @@ class App extends Component {
     let signedIn = false;
 
     if (this.state.signingIn) {
-      inProcessOfSigningIn = <AuthModal closeModal={this.closeModal} getUser={this.getUser} />;
+      inProcessOfSigningIn = <AuthModal closeModal={this.closeModal} />;
     }
 
     if (this.state.user) {
@@ -77,7 +93,7 @@ class App extends Component {
 
     return (
       <div>
-        <NavBar signIn={this.signIn}/>
+        <NavBar signIn={this.handleSignIn} signOut={this.handleSignOut}/>
         <PageHeader>Moments</PageHeader>
         {inProcessOfSigningIn}
         {signedIn}

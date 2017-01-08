@@ -7,13 +7,8 @@ import firebase from 'firebase';
 class NavBar extends Component {
   constructor(props) {
     super(props);
-    this.signOut = this.signOut.bind(this);
-  }
-
-  signOut() {
-    firebase.auth().signOut()
-    .then(() => console.log('logged out'))
-    .catch(err => console.log(err));
+ 
+    // this.props.signOut = this.props.signOut.bind(this);
   }
 
   render() {
@@ -37,7 +32,7 @@ class NavBar extends Component {
                <MenuItem eventKey={3.3}>LinkedIn</MenuItem>
              </NavDropdown>
              <NavItem eventKey={1} href="#" onClick={this.props.signIn}>Sign In</NavItem>
-             <NavItem eventKey={2} href="#" onClick={this.signOut}>Log Out</NavItem>
+             <NavItem eventKey={2} href="#" onClick={this.props.signOut}>Log Out</NavItem>
            </Nav>
          </Navbar.Collapse>
        </Navbar>
