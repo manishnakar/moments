@@ -22765,6 +22765,7 @@
 
 	    _this.getPhotos();
 	    _this.signIn = _this.signIn.bind(_this);
+	    _this.closeModal = _this.closeModal.bind(_this);
 	    return _this;
 	  }
 
@@ -22785,6 +22786,11 @@
 	      });
 	    }
 	  }, {
+	    key: 'closeModal',
+	    value: function closeModal() {
+	      this.setState({ signingIn: false });
+	    }
+	  }, {
 	    key: 'signIn',
 	    value: function signIn() {
 	      this.setState({ signingIn: true });
@@ -22794,7 +22800,7 @@
 	    value: function render() {
 	      var signingIn = false;
 	      if (this.state.signingIn) {
-	        signingIn = _react2.default.createElement(_AuthModal2.default, null);
+	        signingIn = _react2.default.createElement(_AuthModal2.default, { closeModal: this.closeModal });
 	      }
 
 	      return _react2.default.createElement(
@@ -42209,7 +42215,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function AuthModal() {
+	function AuthModal(props) {
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'static-modal' },
@@ -42235,7 +42241,7 @@
 	        null,
 	        _react2.default.createElement(
 	          _reactBootstrap.Button,
-	          null,
+	          { onClick: props.closeModal },
 	          'Close'
 	        ),
 	        _react2.default.createElement(

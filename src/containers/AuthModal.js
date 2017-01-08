@@ -4,7 +4,7 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import Auth from '../components/Auth';
 
-function AuthModal() {
+function AuthModal(props) {
   return (
     <div className="static-modal">
       <Modal.Dialog>
@@ -17,7 +17,7 @@ function AuthModal() {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button>Close</Button>
+        <Button onClick={props.closeModal}>Close</Button>
         <Button bsStyle="primary">Save changes</Button>
       </Modal.Footer>
 

@@ -31,6 +31,7 @@ class App extends Component {
 
     this.getPhotos();
     this.signIn = this.signIn.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   getPhotos() {
@@ -46,6 +47,10 @@ class App extends Component {
     });
   }
 
+  closeModal() {
+    this.setState({signingIn: false});
+  }
+
   signIn() {
     this.setState({signingIn: true});
   }
@@ -53,7 +58,7 @@ class App extends Component {
   render() {
     let signingIn = false;
     if (this.state.signingIn) {
-      signingIn = <AuthModal />;
+      signingIn = <AuthModal closeModal={this.closeModal}/>;
     }
 
     return (
