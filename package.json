@@ -26,6 +26,17 @@
     "url": "https://github.com/stefuhnee/moments/issues"
   },
   "homepage": "https://github.com/stefuhnee/moments#readme",
+  "babel": {
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-react-constant-elements",
+        "transform-react-inline-elements",
+        "transform-react-remove-prop-types"
+      ]
+    }
+  }
+},
   "devDependencies": {
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
