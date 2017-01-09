@@ -74,9 +74,7 @@ class Upload extends Component {
 
     let stringPolicy = JSON.stringify(policyDoc);
     let base64Policy = Buffer(stringPolicy, 'utf-8').toString('base64');
-
     let hmac = crypto.createHmac('sha1', process.env.AWS_SECRET_ACCESS_KEY);
-
     let signature = hmac.update(new Buffer(base64Policy, 'utf-8')).digest('base64');
 
     return (
