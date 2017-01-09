@@ -65,28 +65,31 @@ class Upload extends Component {
       'conditions': [
         {'bucket': 'moments.images'},
         ['starts-with', '$key', 'uploads/'],
-        {'acl': 'public-read'},
+        {'x-amz-acl': 'public-read'},
         {'success_action_redirect': 'http://localhost/'},
         ['starts-with', '$Content-Type', ''],
         ['content-length-range', 0, 1048576],
       ],
     };
 
-    let policy = new Buffer(JSON.stringify(policyDoc)).toString('base64');
+    let stringPolicy = JSON.stringify(policyDoc);
+    let base64Policy = Buffer(stringPolicy, 'utf-8').toString('base64');
+
     let hmac = crypto.createHmac('sha1', process.env.AWS_SECRET_ACCESS_KEY);
 
-    let signature = hmac.update(policy).digest('base64');
+    let signature = hmac.update(new Buffer(base64Policy, 'utf-8')).digest('base64');
+
     return (
 
       <div id="upload">
         <Form horizontal action="https://moments.images.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
 
           <input type="hidden" name="key" value={`/uploads/${this.state.imageKey}`} />
-          <input type="hidden" name="AWSAccessKeyId" value={process.env.AWS_SECRET_ACCESS_KEY} />
-          <input type="hidden" name="acl" value="public-read" />
+          <input type="hidden" name="AWSAccessKeyId" value={process.env.ACCESS_KEY_ID} />
+          <input type="hidden" name="x-amz-acl" value="public-read" />
           <input type="hidden" name="success_action_redirect" value="http://localhost/" />
-          <input type="hidden" name="policy" value={policy} />
-          <input type="hidden" name="signature" value={signature} />
+          <input type="hidden" name="Policy" value={base64Policy} />
+          <input type="hidden" name="X-Amz-Signature" value={signature} />
           <input type="hidden" name="Content-Type" value="image/jpeg" />
 
           <FormGroup>
