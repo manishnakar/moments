@@ -7,7 +7,7 @@
     "build": "webpack -w",
     "start": "node server.js",
     "watch": "webpack-dev-server",
-    "test": "istanbul cover --dir ./coverage _mocha --require ./test/lib/test-setup.js --bail --recursive './test/**/*-test.js' --opts",
+    "test": "istanbul cover --dir ./coverage _mocha --require ./test/lib/test-setup.js --bail --recursive './testx/**/*-test.js' --opts",
     "start-debug": "DEBUG='moments*' npm start",
     "lint": "./node_modules/eslint/bin/eslint.js .",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
@@ -18,7 +18,11 @@
     "url": "git+https://github.com/stefuhnee/moments.git"
   },
   "keywords": [
-    "blog", "react", "firebase", "aws", "s3"
+    "blog",
+    "react",
+    "firebase",
+    "aws",
+    "s3"
   ],
   "author": "stefuhnee@gmail.com",
   "license": "MIT",
@@ -27,16 +31,16 @@
   },
   "homepage": "https://github.com/stefuhnee/moments#readme",
   "babel": {
-  "env": {
-    "production": {
-      "plugins": [
-        "transform-react-constant-elements",
-        "transform-react-inline-elements",
-        "transform-react-remove-prop-types"
-      ]
+    "env": {
+      "production": {
+        "plugins": [
+          "transform-react-constant-elements",
+          "transform-react-inline-elements",
+          "transform-react-remove-prop-types"
+        ]
+      }
     }
-  }
-},
+  },
   "devDependencies": {
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
@@ -56,6 +60,8 @@
     "webpack": "^1.14.0"
   },
   "dependencies": {
+    "aws-sdk": "^2.7.21",
+    "bluebird": "^3.4.7",
     "debug": "^2.4.5",
     "firebase": "^3.6.4",
     "firebaseui": "^1.0.0",

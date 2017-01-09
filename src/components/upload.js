@@ -4,6 +4,9 @@ import React, {Component} from 'react';
 import { Button } from 'react-bootstrap';
 import { Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
 import firebase from 'firebase';
+import crypto from 'crypto';
+
+require('../../env');
 
 class Upload extends Component {
   constructor(props, context) {
@@ -17,6 +20,7 @@ class Upload extends Component {
 
     this.onInputChange = this.onInputChange.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
+    this.addImageToDB = this.addImageToDB.bind(this);
   }
 
   onInputChange(value, field) {
@@ -25,7 +29,7 @@ class Upload extends Component {
     this.setState(state);
   }
 
-  uploadImage(event) {
+  addImageToDB() {
     let newGalleryRef = firebase.database().ref('images/').push();
     this.setState({imageKey: newGalleryRef.key});
     newGalleryRef.set({
@@ -46,10 +50,44 @@ class Upload extends Component {
     // add firebase ref, upload to aws s3.
   }
 
+  uploadImage() {
+
+    // post to S3
+    // add to firebase
+    this.addImageToDB();
+
+  }
+
   render() {
+
+    let policyDoc = {
+      'expiration': '2017-01-15T00:00:00Z',
+      'conditions': [
+        {'bucket': 'moments.images'},
+        ['starts-with', '$key', 'uploads/'],
+        {'acl': 'public-read'},
+        {'success_action_redirect': 'http://localhost/'},
+        ['starts-with', '$Content-Type', ''],
+        ['content-length-range', 0, 1048576],
+      ],
+    };
+
+    let policy = new Buffer(JSON.stringify(policyDoc)).toString('base64');
+    let hmac = crypto.createHmac('sha1', process.env.AWS_SECRET_ACCESS_KEY);
+
+    let signature = hmac.update(policy).digest('base64');
     return (
+
       <div id="upload">
-        <Form horizontal>
+        <Form horizontal action="https://moments.images.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
+
+          <input type="hidden" name="key" value={`/uploads/${this.state.imageKey}`} />
+          <input type="hidden" name="AWSAccessKeyId" value={process.env.AWS_SECRET_ACCESS_KEY} />
+          <input type="hidden" name="acl" value="public-read" />
+          <input type="hidden" name="success_action_redirect" value="http://localhost/" />
+          <input type="hidden" name="policy" value={policy} />
+          <input type="hidden" name="signature" value={signature} />
+          <input type="hidden" name="Content-Type" value="image/jpeg" />
 
           <FormGroup>
             <Col componentClass={ControlLabel} sm={2}>
@@ -70,13 +108,21 @@ class Upload extends Component {
           </FormGroup>
 
           <FormGroup>
+            <Col componentClass={ControlLabel} sm={2}>
+            Description:
+            </Col>
+            <Col sm={10}>
+              <input type="file" placeholder="Description" id="imageFile" name="file" />
+            </Col>
+          </FormGroup>
+
+          <FormGroup>
             <Col smOffset={2} sm={10}>
               <Button onClick={this.uploadImage} bsStyle="primary" type="submit">
                 Upload
               </Button>
             </Col>
           </FormGroup>
-
         </Form>
       </div>
     );
