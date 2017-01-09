@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import { Button } from 'react-bootstrap';
 import { Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
 import firebase from 'firebase';
+import FormData from 'form-data';
 import crypto from 'crypto';
 
 require('../../env');
@@ -50,8 +51,33 @@ class Upload extends Component {
     // add firebase ref, upload to aws s3.
   }
 
-  uploadImage() {
+  uploadImage(fileSource) {
+    try {
+      let formData = new FormData();
+      // Prepare the formData by the S3 options
+      Object.keys(this.state.s3options).forEach((key) => {
+        formData.append(key, this.state.s3options.fields[key]);
+      });
+      formData.append('file', {
+        uri: fileSource.uri,
+        type: 'image/jpeg',
+      });
+      formData.append('Content-Type', 'image/jpeg')
 
+      var request = new XMLHttpRequest();
+      request.onload = function(e) {
+        if (e.target.status === 204) {
+          // Result in e.target.responseHeaders.Location
+          this.setState({avatarSourceRemote: {uri: e.target.responseHeaders.Location}})
+        }
+      }.bind(this)
+      request.open('POST', this.state.s3options.url, true);
+      request.setRequestHeader('Content-type', 'multipart/form-data');
+      request.send(formData);
+    } catch(error) {
+      console.error(error);
+    }
+  }
     // post to S3
     // add to firebase
     this.addImageToDB();
