@@ -60,6 +60,8 @@
     "webpack": "^1.14.0"
   },
   "dependencies": {
+    "aws-sdk": "^2.7.24",
+    "bluebird": "^3.4.7",
     "debug": "^2.4.5",
     "express": "^4.14.0",
     "firebase": "^3.6.4",
